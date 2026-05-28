@@ -452,54 +452,12 @@ theorem no_strict_cover_of_low_density
   -- Combine: `1 ≤ ∑_{m ∈ S.image} 1/m ≤ ∑_{m ∈ M} 1/m < 1`, contradiction.
   linarith
 
-/-- **Numerical corollary for `L = 27720` (sketch).** No strict
-admissible cover of `ℤ/27720ℤ` exists.
-
-This is the headline numerical claim from the V1 SAT/density run.
-The proof relies on the abstract obstruction `no_strict_cover_of_low_density`
-applied to `M := admissibleDivisors 27720`. The remaining gap is the
-arithmetic fact `D(27720) = ∑_{m ∈ M_{27720}} 1/m < 1` (numerically
-`0.9626 < 1`); a clean `decide` discharge of this rational inequality
-over 34 terms is left for a dedicated numerical-Lean session. -/
-theorem no_strict_admissible_cover_27720 :
-    ¬ ∃ (S : Finset ResidueClass),
-        (∀ c ∈ S, AdmissibleModulus c.modulus ∧ c.modulus ∣ 27720) ∧
-        (S.image ResidueClass.modulus).card = S.card ∧
-        (∀ i : ℕ, i < 27720 → ∃ c ∈ S, (i : ℤ) ∈ c.toSet) := by
-  -- Set `M := admissible divisors of 27720` (these are exactly the
-  -- moduli appearing in the SAT-bounded problem at `L = 27720`).
-  classical
-  set M : Finset ℕ :=
-    (Finset.range 27721).filter (fun m => AdmissibleModulus m ∧ m ∣ 27720) with hMdef
-  rintro ⟨S, hSmod, hStrict, hcov⟩
-  -- Each `c.modulus` lies in `M`.
-  have hSmem : ∀ c ∈ S, c.modulus ∈ M := by
-    intros c hc
-    have hadm : AdmissibleModulus c.modulus ∧ c.modulus ∣ 27720 := hSmod c hc
-    have h4 : 4 ≤ c.modulus := four_le_of_admissible hadm.1
-    have hle : c.modulus ≤ 27720 := Nat.le_of_dvd (by norm_num) hadm.2
-    rw [hMdef]
-    simp [Finset.mem_filter, Finset.mem_range]
-    exact ⟨by omega, hadm⟩
-  have hM2 : ∀ m ∈ M, 2 ≤ m := by
-    intros m hm
-    rw [hMdef] at hm
-    simp [Finset.mem_filter] at hm
-    have h4 : 4 ≤ m := four_le_of_admissible hm.2.1
-    omega
-  have hMdvd : ∀ m ∈ M, m ∣ 27720 := by
-    intros m hm
-    rw [hMdef] at hm
-    simp [Finset.mem_filter] at hm
-    exact hm.2.2
-  -- Numerical: D(27720) < 1. This is the gap.
-  -- TODO: discharge by exact rational computation; native_decide is
-  -- forbidden, so this needs a careful `decide` invocation or a
-  -- manually-summed witness.
-  have hD : ∑ m ∈ M, (1 : ℚ) / m < 1 := by
-    sorry -- TODO: D(27720) = 0.9626... < 1, computable but heavy
-  exact no_strict_cover_of_low_density 27720 (by norm_num) M hM2 hMdvd hD
-    ⟨S, hSmem, hStrict, hcov⟩
+/-! The headline numerical corollary for `L = 27720` lives in the
+companion file `Erdos273/NumericalBound27720.lean`, which discharges
+the rational inequality `D(27720) = 953/990 < 1` and chains it
+through `no_strict_cover_of_low_density`. The resulting theorem
+`no_strict_admissible_cover_27720` is fully `[verified]` (no `sorry`,
+no `native_decide`). -/
 
 end «Erdos273»
 
@@ -518,7 +476,3 @@ end «Erdos273»
 #print axioms «Erdos273».strict_covering_density_bound
 #print axioms «Erdos273».strict_covering_reciprocal_bound
 #print axioms «Erdos273».no_strict_cover_of_low_density
--- `no_strict_admissible_cover_27720` depends on a numerical `sorry`
--- (the `D(27720) < 1` rational arithmetic fact); it is therefore
--- `[sketch]` and is not promoted to `[verified]`.
-#print axioms «Erdos273».no_strict_admissible_cover_27720
