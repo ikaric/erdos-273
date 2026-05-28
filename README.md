@@ -40,26 +40,37 @@ literature.
 ## Status
 
 <!-- BEGIN STATUS -->
-- **Last session**: project just initialised (`2026-05-28`)
-- **Roadmap**: [#1](../../issues/1) — sub-lemma checklist with progress meter
-- **Verified results**: 0 / TBD (first `/solve` session will populate)
-- **Current focus**: librarian survey + grounded initial sketch
+- **Last session**: `2026-05-28`
+- **Roadmap**: [#1](../../issues/1) — sub-lemma checklist with progress meter (3 / 6 closed)
+- **Verified results**: 2 headline theorems (density bound + numerical $L = 27720$), 17 `#print axioms`-clean Lean theorems total
+- **Current focus**: V5 range extension; librarian sweep of Hough/BBMST auxiliary results applicable to $\mathcal{M}$
 - **Manuscript**: [`proof.pdf`](manuscript/proof.pdf) — rebuilt every session
 <!-- END STATUS -->
 
 ## What's verified
 
 <!-- BEGIN VERIFIED -->
-*No verified results yet — first `/solve` session has not run.*
+| Theorem | Lean file | Axiom check |
+|---|---|---|
+| Strict-covering density bound (Theorem 4) | [`formal/Erdos273/CoveringSystem.lean`](formal/Erdos273/CoveringSystem.lean) | clean |
+| Abstract density obstruction (Corollary 5) | [`formal/Erdos273/CoveringSystem.lean`](formal/Erdos273/CoveringSystem.lean) | clean |
+| $D(27720) = 953/990 < 1$ (Lemma 7) | [`formal/Erdos273/NumericalBound27720.lean`](formal/Erdos273/NumericalBound27720.lean) | clean |
+| No strict admissible cover with moduli dividing 27720 (Theorem 8) | [`formal/Erdos273/NumericalBound27720.lean`](formal/Erdos273/NumericalBound27720.lean) | clean |
+
+See [`proof.pdf`](manuscript/proof.pdf) and [Appendix A: Formal verification](manuscript/proof.pdf) for the full list (17 axiom-clean theorems).
 <!-- END VERIFIED -->
 
 ## What's open
 
 <!-- BEGIN OPEN -->
+| Obligation | Status | Issue |
+|---|---|---|
+| V2: Distortion-method non-existence (BBMS 2022, $p-1$ specialization) | open | [#4](../../issues/4) |
+| V3: Hough-style minimum-modulus argument adapted to $p-1$ | open | [#5](../../issues/5) |
+| V5: Computational range extension — minimal coverings via $\mathcal{M} \cap [4, L]$ | open | [#7](../../issues/7) |
+
 See the [ROADMAP issue](../../issues/1) for the live sub-lemma
-checklist. Sub-issues carry labels (`open`, `sketch`,
-`numerical`, `conditional`, `survey`, `review`, `deadend`)
-indicating their verification state.
+checklist with progress meter.
 <!-- END OPEN -->
 
 ## Repository tour

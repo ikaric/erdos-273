@@ -1,12 +1,13 @@
 # Status
 
-Current focus: first /solve session — parallel dispatch of (a)
-librarian survey of post-2020 covering-system literature with
-$p-1$ specialization angles, (b) formalist seeding of
-`Erdos273.CoveringSystem` definitions (V4), (c) computationalist
-seeding of `formal/numerics/sat_covering.py` SAT-encoding (V1).
+Current focus: session 1 closed with verified density bound +
+verified numerical lower bound for $L = 27720$. Next session: V5
+range extension (find $L$'s where $D(L) < 1$ still holds beyond
+27720) + librarian dispatch on Hough/BBMST auxiliary results
+applicable to $\mathcal{M}$.
 
-Last commit: 8ee65a0 target: initialize for Erdős Problem #273.
+Last commit: 36f2caa promote: density bound + numerical L=27720
+lower bound [verified].
 
 Blocker: none.
 
