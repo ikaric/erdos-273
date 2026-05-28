@@ -1,13 +1,11 @@
 # Status
 
-Current focus: session 1 closed with verified density bound +
-verified numerical lower bound for $L = 27720$. Next session: V5
-range extension (find $L$'s where $D(L) < 1$ still holds beyond
-27720) + librarian dispatch on Hough/BBMST auxiliary results
-applicable to $\mathcal{M}$.
+Current focus: session 2 — parallel dispatch on (a) V4 sub-goal 2
+wiring (ℤ ↔ ZMod L equivalence + ℤ-form of L=27720 theorem),
+(b) V5 numerical scan for L's > 27720 with D(L) < 1, (c) V3
+librarian survey of Hough's distortion method for the 𝓜 case.
 
-Last commit: 36f2caa promote: density bound + numerical L=27720
-lower bound [verified].
+Last commit: a83660f status: session 1 end.
 
 Blocker: none.
 
