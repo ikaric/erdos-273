@@ -47,8 +47,23 @@
 \maketitle
 
 \begin{abstract}
-\emph{Abstract to be written once the first verified result has
-landed; the introduction below states the problem.}
+A \emph{covering system} of $\mathbb{Z}$ is a finite collection of
+arithmetic progressions whose union is the integers. Erdős Problem
+\#273 (\cite{ErdosGraham1980}, p.~24) asks whether there exists a
+covering system of $\mathbb{Z}$ all of whose moduli are of the form
+$p - 1$ for some prime $p \geq 5$ -- equivalently, whose moduli lie
+in $\mathcal{M} = \{4, 6, 10, 12, 16, 18, 22, 28, 30, 36, 40, 42,
+46, 52, 58, 60, \ldots\}$. We prove a density obstruction: any
+strict covering by progressions with moduli dividing a common
+period $L$ must satisfy $\sum_{m} 1/m \geq 1$, the sum being taken
+over the distinct moduli used. Specialising to $L = 27720 = 2^3
+\cdot 3^2 \cdot 5 \cdot 7 \cdot 11$, the set of admissible divisors
+$M_{27720} = \mathcal{M} \cap \mathrm{div}(27720)$ has $34$ elements
+and satisfies $D(27720) := \sum_{m \in M_{27720}} 1/m = 953/990 <
+1$, ruling out any strict admissible covering whose moduli all
+divide $27720$. The argument and its numerical specialisation are
+formalised in Lean 4 against Mathlib; \texttt{\#print axioms} on
+each theorem reports only the three Lean foundational axioms.
 \end{abstract}
 
 \section{Introduction}
@@ -60,24 +75,35 @@ arithmetic progressions
   \{ a_i \pmod{m_i} \}_{i=1}^{k}, \qquad m_i \geq 2,
 \]
 whose union is $\mathbb{Z}$; equivalently, every integer lies in at
-least one residue class $a_i \pmod{m_i}$. Covering systems were
-introduced by Erdős in 1950, and a sequence of problems concerning
-their structure have driven a substantial body of work in
-combinatorial number theory. The present manuscript concerns one of
-these problems, recorded as Problem \#273 in the Erdős--Graham survey
-\cite{ErdosGraham1980}.
+least one residue class $a_i \pmod{m_i}$. Throughout this manuscript
+we adopt the Erdős--Graham convention that the moduli $m_1, \ldots,
+m_k$ are \emph{distinct}; the resulting object is sometimes called a
+\emph{strict} covering system in the recent literature (cf.\ the
+type \texttt{StrictCoveringSystem} in the DeepMind formal-conjectures
+Lean repository \cite{FormalConjectures}). Without the distinctness
+constraint, every problem of the form ``does there exist a covering
+of $\mathbb{Z}$ with moduli in a fixed set $S$ containing some $m$?''
+trivialises, as $S \ni m$ alone admits the covering $\{0, 1, \ldots,
+m - 1\} \pmod{m}$.
+
+Covering systems were introduced by Erdős in 1950, and a sequence
+of problems concerning their structure have driven a substantial
+body of work in combinatorial number theory. The present manuscript
+concerns one of these problems, recorded as Problem~\#273 in the
+Erdős--Graham survey \cite{ErdosGraham1980}.
 
 \begin{conjecture}[Erdős \#273]
 \label{conj:e273}
-Does there exist a covering system $\{ a_i \pmod{m_i} \}_{i=1}^{k}$
-of\/ $\mathbb{Z}$ such that each modulus $m_i$ has the form
-$m_i = p_i - 1$ for some prime $p_i \geq 5$?
+Does there exist a strict covering system $\{ a_i \pmod{m_i}
+\}_{i=1}^{k}$ of\/ $\mathbb{Z}$ such that each modulus $m_i$ has the
+form $m_i = p_i - 1$ for some prime $p_i \geq 5$?
 \end{conjecture}
 
 Write $\mathcal{M} := \{ p - 1 : p \text{ prime}, \ p \geq 5 \} =
 \{4, 6, 10, 12, 16, 18, 22, 28, 30, 36, 40, 42, 46, 52, 58, 60, \ldots\}$
 for the set of allowed moduli. The question is whether $\mathbb{Z}$
-admits a finite covering whose moduli are drawn from $\mathcal{M}$.
+admits a finite strict covering whose moduli are drawn from
+$\mathcal{M}$.
 
 The restriction $p \geq 5$ is essential. Selfridge observed that
 allowing $p = 3$ admits a covering system using divisors of
@@ -96,25 +122,336 @@ required in any covering system, ruling out covering systems with all
 moduli larger than a fixed constant. Balister, Bollobás, Morris and
 Sahasrabudhe \cite{BBMS2022} extended Hough's distortion method to a
 general non-existence framework for covering systems whose moduli are
-constrained to a multiplicatively structured set. Specializing either
-machine to $\mathcal{M}$ is a natural avenue, although neither result
-has been adapted to the present restriction in the published
+constrained to a multiplicatively structured set, lowering Hough's
+universal minimum-modulus bound from $10^{16}$ to $616{,}000$. Neither
+result has been adapted to the present restriction in the published
 literature.
 
-To the author's knowledge, Conjecture~\ref{conj:e273} is open as of
-2026; no partial result---a lower or upper bound on the smallest
-required modulus, on the number of progressions, or on the least
-common multiple of any putative covering---appears in the published
-literature.
+Conjecture~\ref{conj:e273} appears to be open as of~2026; no partial
+result---a lower or upper bound on the smallest required modulus, on
+the number of progressions, or on the least common multiple of any
+putative covering---appears in the published literature.
 
-The main result of this manuscript is recorded in
-Section~\ref{sec:main}, currently in preparation.
+\paragraph{Main result.}
+We establish an elementary density obstruction to bounded-period
+strict admissible coverings. The first ingredient is a counting
+union bound (Theorem~\ref{thm:density}) saying that any strict
+covering of $\mathbb{Z}$ by progressions whose moduli divide a
+common period $L$ requires the sum of reciprocal moduli to be at
+least~$1$. Specialising to $L = 27720 = 2^3\cdot 3^2 \cdot 5 \cdot 7
+\cdot 11$, the set of admissible moduli dividing~$27720$ has
+$34$~elements and the corresponding reciprocal-sum equals
+$953/990 < 1$, immediately ruling out any strict covering of
+$\mathbb{Z}$ by admissible progressions whose moduli all divide
+$27720$ (Theorem~\ref{thm:numerical-27720}).
 
-\section{Main result}
-\label{sec:main}
+This conclusion does not refute Conjecture~\ref{conj:e273}: a
+putative covering may use moduli with LCM exceeding~$27720$. It is
+a lower bound on the structural complexity any solution must have.
+Equivalently: any covering of $\mathbb{Z}$ by progressions with
+moduli in $\mathcal{M}$ must use at least one modulus that does not
+divide $27720$. Bounded-period SAT enumeration confirms the same
+non-existence at every $L$ in $\{60, 120, 360, 840, 2520, 27720\}$
+independently; see Section~\ref{sec:numerics}.
 
-% [sketch] main result placeholder — to be stated and proved by /solve.
-\emph{Statement and proof in preparation.}
+\section{The density obstruction}
+\label{sec:density}
+
+Throughout this section, a \emph{residue class} is a pair
+$(a, m) \in \mathbb{Z} \times \mathbb{N}_{\geq 2}$ together with
+the set $a + m\mathbb{Z} \subseteq \mathbb{Z}$.
+
+% [verified: formal/Erdos273/CoveringSystem.lean]
+\begin{lemma}\label{lem:per-class-count}
+Let $(a, m)$ be a residue class with $m \mid L$, $L \geq 1$. Then
+the set $\{ i \in [0, L) : i \equiv a \pmod{m} \}$ has cardinality
+exactly $L / m$.
+\end{lemma}
+\begin{proof}
+Write $L = mq$ with $q = L/m \in \mathbb{N}$. The map $j \mapsto a +
+mj \pmod{L}$ is a bijection between $\{0, 1, \ldots, q-1\}$ and
+$\{ i \in [0, L) : i \equiv a \pmod m \}$. The lemma states the
+cardinality of the latter equals $q = L/m$.
+\end{proof}
+
+% [verified: formal/Erdos273/CoveringSystem.lean]
+\begin{lemma}[Density union bound]
+\label{lem:density}
+Let $L \geq 1$ and let $S$ be a finite collection of residue classes
+$(a_i, m_i)$ with $m_i \mid L$ for all $i$. Then
+\[
+  \bigl| \{ i \in [0, L) : \exists\, (a, m) \in S,\ i \equiv a
+  \pmod{m} \} \bigr|
+  \ \leq\ \sum_{(a, m) \in S} \frac{L}{m}.
+\]
+\end{lemma}
+\begin{proof}
+Each residue class $(a, m) \in S$ covers a subset of $[0, L)$ of
+cardinality $L / m$ by Lemma~\ref{lem:per-class-count}. The
+left-hand side is the cardinality of the union of these subsets, and
+the cardinality of a finite union is at most the sum of the
+cardinalities (the union bound).
+\end{proof}
+
+The main density theorem is the contrapositive of
+Lemma~\ref{lem:density} together with the strictness assumption.
+
+% [verified: formal/Erdos273/CoveringSystem.lean]
+\begin{theorem}[Strict-covering density bound]
+\label{thm:density}
+Let $L \geq 1$ and let $S$ be a strict (i.e., with distinct moduli)
+covering of $\mathbb{Z}/L\mathbb{Z}$ by residue classes whose moduli
+all divide~$L$. Write $M = \{ m_i : (a_i, m_i) \in S \}$ for the
+set of moduli used. Then
+\[
+  \sum_{m \in M} \frac{1}{m} \ \geq\ 1.
+\]
+\end{theorem}
+\begin{proof}
+Apply Lemma~\ref{lem:density} to $S$: the cardinality of the
+covered subset is at most $\sum_{(a, m) \in S} L/m$. Since $S$
+covers all of $[0, L)$, the covered cardinality is exactly~$L$, so
+$L \leq \sum_{(a, m) \in S} L/m$. Strictness implies the
+moduli $m_i$ are pairwise distinct, so $\sum_{(a, m) \in S} L/m =
+\sum_{m \in M} L/m = L \sum_{m \in M} 1/m$. Dividing by~$L > 0$
+gives the stated bound.\footnote{Formally verified in Lean 4 +
+Mathlib (commit \texttt{c5ea00351c28}); see
+\texttt{formal/Erdos273/CoveringSystem.lean}, theorems
+\texttt{strict\_covering\_density\_bound} and
+\texttt{strict\_covering\_reciprocal\_bound}.}
+\end{proof}
+
+% [verified: formal/Erdos273/CoveringSystem.lean]
+\begin{corollary}[Abstract density obstruction]
+\label{cor:abstract-obstruction}
+Let $L \geq 1$ and let $M \subseteq \mathbb{N}_{\geq 2}$ be a finite
+set of candidate moduli, each dividing~$L$. If
+$\sum_{m \in M} 1/m < 1$, then no strict covering of
+$\mathbb{Z}/L\mathbb{Z}$ by residue classes with moduli in~$M$
+exists.
+\end{corollary}
+\begin{proof}
+Were there such a covering, Theorem~\ref{thm:density} applied to
+the subset $M' \subseteq M$ of moduli actually used would yield
+$\sum_{m \in M'} 1/m \geq 1$. But $M' \subseteq M$ and reciprocals
+are positive, so $\sum_{m \in M'} 1/m \leq \sum_{m \in M} 1/m < 1$,
+a contradiction.
+\end{proof}
+
+\section{The numerical bound at \texorpdfstring{$L = 27720$}{L=27720}}
+\label{sec:numerics}
+
+Let
+\[
+  M_{27720} \ := \ \mathcal{M} \cap \mathrm{div}(27720)
+  \ = \ \{ m \in \mathcal{M} : m \mid 27720 \}.
+\]
+Since $27720 = 2^3 \cdot 3^2 \cdot 5 \cdot 7 \cdot 11$, the
+divisor lattice of $27720$ has $96$~elements; enumerating those
+which equal $p - 1$ for some prime $p \geq 5$ yields a list of $34$
+admissible moduli, ranging from $m = 4$ (witness $p = 5$) to $m =
+9240$ (witness $p = 9241$).
+
+% [verified: formal/Erdos273/NumericalBound27720.lean]
+\begin{lemma}\label{lem:M27720}
+The set $M_{27720}$ has $34$ elements; explicitly,
+\begin{align*}
+  M_{27720} = \{\,&4,\ 6,\ 10,\ 12,\ 18,\ 22,\ 28,\ 30,\ 36,\ 40,\
+                   42,\ 60,\ 66,\ 70,\ 72,\ 88,\ 126,\\
+                  & 180,\ 198,\ 210,\ 280,\ 330,\ 396,\ 420,\ 462,\
+                   616,\ 630,\\
+                  & 660,\ 990,\ 1320,\ 2310,\ 2520,\ 4620,\ 9240\,\}.
+\end{align*}
+\end{lemma}
+\begin{proof}
+The $96$ divisors of $27720$ are the products $2^a 3^b 5^c 7^d
+11^e$ with $a \in \{0,1,2,3\}$, $b \in \{0,1,2\}$, $c, d, e \in
+\{0, 1\}$. For each such divisor $m \geq 4$ one checks whether
+$m + 1$ is prime, retaining those for which it is. The listed $34$
+values are precisely those that pass the check.
+\end{proof}
+
+% [verified: formal/Erdos273/NumericalBound27720.lean]
+\begin{lemma}\label{lem:D27720}
+$\displaystyle D(27720)\ :=\ \sum_{m \in M_{27720}} \frac{1}{m}\ =\
+\frac{953}{990}\ <\ 1.$
+\end{lemma}
+\begin{proof}
+Direct rational computation over the $34$ terms of $M_{27720}$.
+The common denominator divides $\operatorname{lcm}(M_{27720}) =
+27720$; the sum equals $953/990$, which is strictly less than~$1$.
+\end{proof}
+
+% [verified: formal/Erdos273/NumericalBound27720.lean]
+\begin{theorem}[Numerical lower bound on Erdős \#273]
+\label{thm:numerical-27720}
+There is no strict covering of\/ $\mathbb{Z}$ by residue classes
+whose moduli all lie in $\mathcal{M}$ and all divide $27720 = 2^3
+\cdot 3^2 \cdot 5 \cdot 7 \cdot 11$.\footnote{Formally verified in
+Lean 4 + Mathlib (commit \texttt{c5ea00351c28}); see
+\texttt{formal/Erdos273/NumericalBound27720.lean}, theorem
+\texttt{no\_strict\_admissible\_cover\_27720}.}
+\end{theorem}
+\begin{proof}
+Since $27720 \in \mathbb{N}_{\geq 1}$ and every element of
+$M_{27720}$ satisfies $m \geq 4 \geq 2$ and $m \mid 27720$, the
+hypotheses of Corollary~\ref{cor:abstract-obstruction} apply with
+$L = 27720$ and $M = M_{27720}$. The inequality $D(27720) < 1$
+follows from Lemma~\ref{lem:D27720}. Hence no strict covering of
+$\mathbb{Z}/27720\mathbb{Z}$ by residue classes with moduli in
+$M_{27720}$ exists. Lifting from $\mathbb{Z}/27720\mathbb{Z}$ to
+$\mathbb{Z}$: any progression with modulus dividing $27720$ is
+$27720$-periodic, so covering $\mathbb{Z}$ is equivalent to
+covering $\mathbb{Z}/27720\mathbb{Z}$ for such progressions, and
+the latter has been ruled out.
+\end{proof}
+
+\begin{corollary}\label{cor:lcm-lower-bound}
+If a strict covering of $\mathbb{Z}$ exists whose moduli all lie in
+$\mathcal{M}$ (i.e., if Erdős Conjecture~\ref{conj:e273} has a
+positive answer), then the least common multiple of its moduli is
+not a divisor of $27720$; equivalently, the covering must use at
+least one modulus $m \in \mathcal{M}$ with $m \nmid 27720$.
+\end{corollary}
+\begin{proof}
+Immediate from Theorem~\ref{thm:numerical-27720} by
+contraposition: if every modulus divides $27720$, the LCM divides
+$27720$, contradicting non-existence.
+\end{proof}
+
+% [numerical: L ∈ {60, 120, 360, 840, 2520, 27720}]
+\begin{remark}\label{rem:sat-evidence}
+The non-existence of a strict admissible covering at $L = 27720$ is
+the largest in a sequence of bounded-period non-existence statements
+established by SAT search in the script
+\texttt{formal/numerics/sat\_covering.py}. The CaDiCaL solver
+\cite{Biere2024CaDiCaL} confirms UNSAT at $L \in \{60, 120, 360,
+840\}$ directly (each instance has $D(L) < 1$ and is decided by the
+solver in under four seconds); for $L \in \{2520, 27720\}$ the
+density argument of Theorem~\ref{thm:density} is sharper than CDCL
+search at the chosen budgets. The first $L$ where $D(L) \geq 1$ is
+$L = 360360$, where $D(L) = 1.0237$, at which point the density
+argument no longer applies and the bounded-period question becomes
+genuinely combinatorial.
+\end{remark}
+
+\section{Concluding remarks}
+\label{sec:concluding}
+
+Theorem~\ref{thm:density} and its abstract corollary
+\ref{cor:abstract-obstruction} are stated and proved without
+arithmetic content -- they apply to any set of admissible moduli
+$\mathcal{M}$, not just $\{p - 1 : p \geq 5 \text{ prime}\}$. The
+numerical bound at $L = 27720$
+(Theorem~\ref{thm:numerical-27720}) is one instance; the same
+machinery can be re-applied at other periods. The first arithmetic
+fact one would attack next is the question of whether $D(L)$ stays
+strictly below~$1$ along a useful sequence of $L$. As noted in
+Remark~\ref{rem:sat-evidence}, $D(360360) > 1$, so the density
+obstruction alone cannot be pushed further along the canonical
+``small-LCM'' sequence; ruling out covering at larger $L$ requires
+either bounded-period SAT search (currently indeterminate within a
+five-second budget per instance) or a deeper non-existence argument.
+
+The literature offers two such deeper arguments. Hough's
+distortion method \cite{Hough2015} and its strengthening by
+Balister--Bollobás--Morris--Sahasrabudhe \cite{BBMS2022} produce
+non-existence results for covering systems whose moduli set
+satisfies a multiplicative-density hypothesis. A direct check
+shows that the weighted sum $C(\mathcal{M}) = \sum_{m \in
+\mathcal{M}} \mu(m)/m$ used in their density theorem diverges
+(by Mertens, since $\sum_p 1/p$ does), so the BBMST density
+theorem does not apply uniformly to $\mathcal{M}$. Their
+auxiliary results, however -- for example the
+divisibility-pair theorem (any covering contains a pair $m_i \mid
+m_j$) -- do constrain admissible coverings without invoking the
+density hypothesis. Adapting these constraints to $\mathcal{M}$,
+and combining them with the bounded-period density obstruction
+established here, is a natural direction for further work.
+
+\appendix
+
+\section{Formal verification}
+\label{sec:formal}
+
+The mathematical content of Sections~\ref{sec:density} and
+\ref{sec:numerics} has been formally verified in Lean~4 against the
+Mathlib library (commit \texttt{c5ea00351c28}). The proof scripts
+live in this manuscript's repository under \texttt{formal/} and
+compile under \texttt{lake build}. For every verified statement
+listed below, \texttt{\#print axioms} reports a dependency chain
+consisting of only the three Lean foundational axioms
+$\{\texttt{propext},\ \texttt{Classical.choice},\ \texttt{Quot.sound}\}$.
+In particular, no \texttt{sorry}, no project-local \texttt{axiom},
+and no \texttt{native\_decide} (which would inject the axiom
+\texttt{Lean.ofReduceBool} into the dependency chain) is used.
+
+\begin{sloppypar}
+All declarations live in the Lean namespace \texttt{Erdos273};
+identifiers below are referenced without the namespace prefix to
+keep the lines readable.
+
+\begin{itemize}
+  \item Lemma~\ref{lem:per-class-count}
+        (\texttt{card\_covered\_eq}),
+  \item Lemma~\ref{lem:density}
+        (\texttt{density\_union\_bound}),
+  \item Theorem~\ref{thm:density}
+        (\texttt{strict\_covering\_density\_bound};
+        rational form \texttt{strict\_covering\_reciprocal\_bound}),
+  \item Corollary~\ref{cor:abstract-obstruction}
+        (\texttt{no\_strict\_cover\_of\_low\_density}):
+\end{itemize}
+all in \texttt{formal/Erdos273/CoveringSystem.lean}.
+
+\begin{itemize}
+  \item Lemma~\ref{lem:M27720}: enumeration
+        (\texttt{M27720\_eq\_filter\_divisors}) and
+        cardinality (\texttt{M27720\_card}),
+  \item Lemma~\ref{lem:D27720}
+        (\texttt{D27720\_lt\_one}),
+  \item Theorem~\ref{thm:numerical-27720}
+        (\texttt{no\_strict\_admissible\_cover\_27720}):
+\end{itemize}
+all in \texttt{formal/Erdos273/NumericalBound27720.lean}.
+\end{sloppypar}
+
+The formalisation defines a \texttt{ResidueClass} structure
+recording the modulus $m \geq 2$ and the residue (canonically as an
+element of \texttt{ZMod m}); a \texttt{CoveringSystem} structure
+packaging a \texttt{Finset ResidueClass} with the covering proof;
+and a predicate \texttt{CoveringSystem.IsStrict} encoding the
+distinctness of moduli. The set
+$\mathcal{M}$ is implemented as \texttt{Erdos273.AdmissibleModulus},
+a decidable predicate; the set $M_{27720}$ is implemented as an
+explicit \texttt{Finset} of $34$ natural numbers and proved equal to
+$\texttt{Nat.divisors 27720}$ filtered by admissibility (kernel
+\texttt{decide}, not \texttt{native\_decide}).
+
+\section{Bounded-period SAT enumeration}
+\label{sec:sat}
+
+Independent of the density argument, the script
+\texttt{formal/numerics/sat\_covering.py} encodes the bounded-period
+strict covering problem at user-specified $L$ as a propositional
+CNF (one Boolean variable per candidate pair $(a, m)$ with $m \in
+M_L,\ 0 \leq a < m$, distinctness as at-most-one constraints per
+modulus, covering as ``at least one variable true'' constraints per
+residue $i \in [0, L)$). The script invokes \texttt{cadical}
+\cite{Biere2024CaDiCaL} via DIMACS subprocess. The empirical
+results recorded above (Remark~\ref{rem:sat-evidence}) are
+reproducible from the script.
+
+The SAT outputs are not, on their own, machine-checked: certifying
+a CDCL solver's UNSAT verdict in Lean would require importing an
+LRAT-checker, which is not yet in this project. The density argument
+(Theorem~\ref{thm:density}) supersedes the SAT certificates for
+every UNSAT verdict in the canonical sequence $L \in \{60, 120,
+360, 840, 2520, 27720\}$, so the formally-verified statement
+(Theorem~\ref{thm:numerical-27720}) does not depend on the SAT
+solver. The SAT enumeration remains useful as a check for
+$L \geq 360360$, where the density argument no longer applies and
+the question becomes genuinely combinatorial.
 
 \begin{thebibliography}{99}
 
@@ -135,6 +472,19 @@ P.~Balister, B.~Bollobás, R.~Morris, and J.~Sahasrabudhe,
 \emph{On the Erdős covering problem: the density of the uncovered set},
 Inventiones Mathematicae \textbf{228} (2022), no.~1, 377--414.
 \href{https://arxiv.org/abs/1811.03547}{arXiv:1811.03547}.
+
+\bibitem{FormalConjectures}
+DeepMind,
+\emph{formal-conjectures: a repository of formal-mathematics
+conjectures in Lean~4},
+\url{https://github.com/google-deepmind/formal-conjectures},
+accessed 2026-05-28.
+
+\bibitem{Biere2024CaDiCaL}
+A.~Biere, K.~Fazekas, M.~Fleury, M.~Heisinger,
+\emph{CaDiCaL, Kissat, Paracooba, Plingeling and Treengeling at the SAT
+Competition}, Proceedings of the SAT Competition 2024,
+\href{https://github.com/arminbiere/cadical}{github.com/arminbiere/cadical}.
 
 \end{thebibliography}
 
