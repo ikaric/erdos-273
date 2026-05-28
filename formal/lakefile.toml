@@ -1,5 +1,5 @@
-name = "Formalia"
-defaultTargets = ["Formalia"]
+name = "Erdos273"
+defaultTargets = ["Erdos273"]
 
 [[require]]
 name = "mathlib"
@@ -7,4 +7,4 @@ git = "https://github.com/leanprover-community/mathlib4.git"
 rev = "v4.30.0"
 
 [[lean_lib]]
-name = "Formalia"
+name = "Erdos273"

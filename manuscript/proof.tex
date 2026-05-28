@@ -1,11 +1,3 @@
-% FORMALIA_TEMPLATE
-%
-% This file is the formalia template manuscript. While this marker
-% comment is present, the clone has not been bootstrapped yet — run
-% the /target skill to define the target problem. /target replaces
-% this header, the \title, the Introduction, and the Main result
-% section with the user-supplied content, then removes the marker line.
-
 \documentclass[11pt,a4paper]{article}
 
 \usepackage[a4paper, margin=2.5cm]{geometry}
@@ -45,11 +37,9 @@
 \newtheorem{remark}[theorem]{Remark}
 \newtheorem*{sketch}{Sketch}
 
-\title{Untitled (formalia template)}
-% /target rewrites \author{} with the value of `git config user.name`
-% (set by `make init`). Until then, the placeholder below is plain text
-% so the template manuscript still compiles cleanly under tectonic.
-\author{Author --- set by \texttt{/target}}
+\title{Covering systems with moduli of the form $p-1$, $p \geq 5$ prime\\
+\large{Erdős Problem \#273}}
+\author{Ilhan Karić}
 \date{\today}
 
 \begin{document}
@@ -57,13 +47,95 @@
 \maketitle
 
 \begin{abstract}
-This manuscript is the formalia template. It has not been configured
-for a specific open problem yet. Run the \texttt{/target} skill to
-seed it.
+\emph{Abstract to be written once the first verified result has
+landed; the introduction below states the problem.}
 \end{abstract}
 
 \section{Introduction}
+\label{sec:intro}
 
-\emph{Pending \texttt{/target}.}
+A \emph{covering system} of the integers is a finite collection of
+arithmetic progressions
+\[
+  \{ a_i \pmod{m_i} \}_{i=1}^{k}, \qquad m_i \geq 2,
+\]
+whose union is $\mathbb{Z}$; equivalently, every integer lies in at
+least one residue class $a_i \pmod{m_i}$. Covering systems were
+introduced by Erdős in 1950, and a sequence of problems concerning
+their structure have driven a substantial body of work in
+combinatorial number theory. The present manuscript concerns one of
+these problems, recorded as Problem \#273 in the Erdős--Graham survey
+\cite{ErdosGraham1980}.
+
+\begin{conjecture}[Erdős \#273]
+\label{conj:e273}
+Does there exist a covering system $\{ a_i \pmod{m_i} \}_{i=1}^{k}$
+of\/ $\mathbb{Z}$ such that each modulus $m_i$ has the form
+$m_i = p_i - 1$ for some prime $p_i \geq 5$?
+\end{conjecture}
+
+Write $\mathcal{M} := \{ p - 1 : p \text{ prime}, \ p \geq 5 \} =
+\{4, 6, 10, 12, 16, 18, 22, 28, 30, 36, 40, 42, 46, 52, 58, 60, \ldots\}$
+for the set of allowed moduli. The question is whether $\mathbb{Z}$
+admits a finite covering whose moduli are drawn from $\mathcal{M}$.
+
+The restriction $p \geq 5$ is essential. Selfridge observed that
+allowing $p = 3$ admits a covering system using divisors of
+$360 = \operatorname{lcm}(2,3,4,5,6,8,9,10,12)$, all of which are of
+the form $p - 1$ for $p \in \{3, 5, 7\}$. The Selfridge construction
+crucially uses the modulus $2 = 3 - 1$. Forbidding $p = 3$
+eliminates the modulus~$2$ entirely and changes the problem: any
+covering by progressions modulo elements of $\mathcal{M}$ must
+account for every parity class without ever using the all-purpose
+modulus~$2$, and the second-smallest available modulus is~$4$.
+
+Two pieces of recent machinery bear on the question. Hough
+\cite{Hough2015} resolved the longstanding Erdős minimum-modulus
+problem by establishing a finite upper bound on the smallest modulus
+required in any covering system, ruling out covering systems with all
+moduli larger than a fixed constant. Balister, Bollobás, Morris and
+Sahasrabudhe \cite{BBMS2022} extended Hough's distortion method to a
+general non-existence framework for covering systems whose moduli are
+constrained to a multiplicatively structured set. Specializing either
+machine to $\mathcal{M}$ is a natural avenue, although neither result
+has been adapted to the present restriction in the published
+literature.
+
+To the author's knowledge, Conjecture~\ref{conj:e273} is open as of
+2026; no partial result---a lower or upper bound on the smallest
+required modulus, on the number of progressions, or on the least
+common multiple of any putative covering---appears in the published
+literature.
+
+The main result of this manuscript is recorded in
+Section~\ref{sec:main}, currently in preparation.
+
+\section{Main result}
+\label{sec:main}
+
+% [sketch] main result placeholder — to be stated and proved by /solve.
+\emph{Statement and proof in preparation.}
+
+\begin{thebibliography}{99}
+
+\bibitem{ErdosGraham1980}
+P.~Erdős and R.~L.~Graham,
+\emph{Old and new problems and results in combinatorial number theory},
+L'Enseignement Mathématique \textbf{28} (1980), Problem~\#273,
+p.~24.
+
+\bibitem{Hough2015}
+B.~Hough,
+\emph{Solution of the minimum modulus problem for covering systems},
+Annals of Mathematics \textbf{181} (2015), no.~1, 361--382.
+\href{https://arxiv.org/abs/1307.0874}{arXiv:1307.0874}.
+
+\bibitem{BBMS2022}
+P.~Balister, B.~Bollobás, R.~Morris, and J.~Sahasrabudhe,
+\emph{On the Erdős covering problem: the density of the uncovered set},
+Inventiones Mathematicae \textbf{228} (2022), no.~1, 377--414.
+\href{https://arxiv.org/abs/1811.03547}{arXiv:1811.03547}.
+
+\end{thebibliography}
 
 \end{document}

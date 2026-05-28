@@ -1,23 +1,10 @@
 # Status
 
-This is the **formalia template repository**. No live work happens
-here.
+Current focus: project just initialized; first /solve session
+will run librarian survey + grounded sketch.
 
-To start a new attempt:
+Last commit: target commit (this commit).
 
-```sh
-gh repo create --template <upstream-owner>/formalia \
-     <your-username>/<problem-name> --private --clone
-cd <problem-name>
+Blocker: none.
 
-# One-time per-clone setup — fills in git identity and substitutes
-# the GH_USERNAME / GIT_USER_NAME / GIT_USER_EMAIL placeholders.
-make init
-
-# In Claude Code:
-/target
-# Then:
-/loop /solve
-```
-
-`/target` overwrites this file with the per-clone initial state.
+Problem: Covering systems with moduli of the form $p-1$, $p \geq 5$ prime (Erdős Problem #273).
