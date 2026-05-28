@@ -40,10 +40,10 @@ literature.
 ## Status
 
 <!-- BEGIN STATUS -->
-- **Last session**: `2026-05-28` (session 4)
+- **Last session**: `2026-05-28` (session 5)
 - **Roadmap**: [#1](../../issues/1) — sub-lemma checklist with progress meter (4 / 6 closed)
-- **Verified results**: 32 `#print axioms`-clean Lean theorems across 5 files; headline results — strict-covering density bound, numerical $L = 27720$ obstruction (range and $\mathbb{Z}$ forms), strengthening at $L = 83160$, and the independent $L = 180180$ obstruction (prime 13)
-- **Current focus**: V3 (#5) CFT/distortion $\delta_j$ optimization for $\mathcal{M}$ — the lever toward the full problem (density alone is Mertens-capped)
+- **Verified results**: 33 `#print axioms`-clean Lean theorems across 6 files; headline results — strict-covering density bound, numerical obstructions at $L = 27720, 83160, 180180$, and the divergence $\sum_{m\in\mathcal{M}} 1/m = \infty$ (why density alone is capped)
+- **Current focus**: V3 (#5) hyperplane-restriction count for $\mathcal{M}$ — the CFT engine is validated; next is putting the $1/(p-1)$ density on the admissible-hyperplane count (analyst task), the lever toward the full problem
 - **Manuscript**: [`proof.pdf`](manuscript/proof.pdf) — rebuilt every session
 <!-- END STATUS -->
 
@@ -61,8 +61,9 @@ literature.
 | Erdős#273 ⇒ covering uses modulus $\nmid 27720$ (Corollary 9) | [`formal/Erdos273/IntegerForm.lean`](formal/Erdos273/IntegerForm.lean) | clean |
 | No strict admissible cover with moduli $\mid 83160$ ($\mathbb{Z}$-form; strengthens 27720) | [`formal/Erdos273/NumericalBound83160.lean`](formal/Erdos273/NumericalBound83160.lean) | clean |
 | No strict admissible cover with moduli $\mid 180180$ ($\mathbb{Z}$-form; independent, prime 13) | [`formal/Erdos273/NumericalBound180180.lean`](formal/Erdos273/NumericalBound180180.lean) | clean |
+| $\sum_{m\in\mathcal{M}} 1/m = \infty$ (density method is capped) | [`formal/Erdos273/DensityDivergence.lean`](formal/Erdos273/DensityDivergence.lean) | clean |
 
-See [`proof.pdf`](manuscript/proof.pdf) and [Appendix A: Formal verification](manuscript/proof.pdf) for the full list (32 axiom-clean theorems).
+See [`proof.pdf`](manuscript/proof.pdf) and [Appendix A: Formal verification](manuscript/proof.pdf) for the full list (33 axiom-clean theorems).
 <!-- END VERIFIED -->
 
 ## What's open

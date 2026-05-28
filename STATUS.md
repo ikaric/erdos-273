@@ -1,18 +1,19 @@
 # Status
 
-Current focus: V5 closed — two verified density strengthenings landed
-this session. L=83160 (strictly strengthens 27720) and L=180180
-(independent, introduces prime 13) are both axiom-clean and promoted.
-Key fix: replaced the pathological kernel `decide` (range scan +
-O(p) primality) with `Nat.divisors_mul` + `norm_num` — now the
-standard recipe (builds ~2–4 min, not >20 min/OOM). Next: V3 (#5)
-CFT/distortion δ_j optimization for 𝓜 — the only lever toward the
-full problem (density alone is Mertens-capped); first debug the
-squarefree sanity check (loose tail at N=200). V2 (#4) recommended
-for retirement (BBMST levers dead for 𝓜).
+Current focus: V3 advanced + density divergence verified. This
+session: (1) verified `admissible_reciprocal_not_summable`
+(∑_{m∈𝓜}1/m=∞, DensityDivergence.lean) — formalizes why density is
+capped; (2) V3 CFT engine VALIDATED (squarefree reproduces CFT's
+0.99938506 to 8 sig figs), but the naive 𝓜-specialization disproved
+(per-coordinate-weight substitution over-reaches). Next V3 step
+(analyst): the hyperplane-restriction count — put 1/(p-1) on the
+count of admissible hyperplanes (Siegel–Walfisz), feed the validated
+engine. V2 (#4) recommended for retirement (both BBMST levers dead
+for 𝓜).
 
-Last commit: 6c21aa9 pdf: rebuild after L=180180 promotion.
+Last commit: density-divergence promotion + V3 CFT findings + PDF.
 
-Blocker: none.
+Blocker: V3 hyperplane count is a multi-session analyst task; density
+method is provably capped (verified), so V3 is the only forward lever.
 
 Problem: Covering systems with moduli of the form $p-1$, $p \geq 5$ prime (Erdős Problem #273).
