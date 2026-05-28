@@ -61,9 +61,12 @@ over the distinct moduli used. Specialising to $L = 27720 = 2^3
 $M_{27720} = \mathcal{M} \cap \mathrm{div}(27720)$ has $34$ elements
 and satisfies $D(27720) := \sum_{m \in M_{27720}} 1/m = 953/990 <
 1$, ruling out any strict admissible covering whose moduli all
-divide $27720$. The argument and its numerical specialisation are
-formalised in Lean 4 against Mathlib; \texttt{\#print axioms} on
-each theorem reports only the three Lean foundational axioms.
+divide $27720$; a refinement at $L = 83160 = 2^3 \cdot 3^3 \cdot 5
+\cdot 7 \cdot 11$ strictly strengthens this by adjoining eleven
+further admissible moduli. The argument and its numerical
+specialisations are formalised in Lean 4 against Mathlib;
+\texttt{\#print axioms} on each theorem reports only the three Lean
+foundational axioms.
 \end{abstract}
 
 \section{Introduction}
@@ -326,6 +329,45 @@ The contrapositive of Theorem~\ref{thm:numerical-27720}: if every
 modulus divided $27720$, the covering would be ruled out.
 \end{proof}
 
+The same machinery applies verbatim at any period $L$ whose
+admissible divisors have reciprocal sum below~$1$. The smallest such
+$L$ that is not already subsumed by $27720$ is $L = 83160 = 27720
+\cdot 3$, obtained by adjoining a third factor of~$3$.
+
+% [verified: formal/Erdos273/NumericalBound83160.lean]
+\begin{theorem}[{Strengthened numerical bound at $L = 83160$}]
+\label{thm:numerical-83160}
+There is no strict covering of\/ $\mathbb{Z}$ by residue classes
+whose moduli all lie in $\mathcal{M}$ and all divide $83160 = 2^3
+\cdot 3^3 \cdot 5 \cdot 7 \cdot 11$.\footnote{Formally verified in
+Lean 4 + Mathlib (commit \texttt{c5ea00351c28}); see
+\texttt{formal/Erdos273/NumericalBound83160.lean}, theorem
+\texttt{no\_strict\_admissible\_covering\_Z\_83160}.}
+\end{theorem}
+\begin{proof}
+The divisor lattice of $83160$ has $128$ elements, of which $45$ are
+admissible; they form
+\[
+  M_{83160} = M_{27720} \cup \{108,\ 270,\ 378,\ 540,\ 756,\ 2376,\
+  2970,\ 4158,\ 7560,\ 8316,\ 16632\},
+\]
+the eleven new moduli being precisely the admissible multiples of
+$108 = 109 - 1$ made available by the third factor of~$3$. Their
+reciprocal sum is
+\[
+  D(83160) = \sum_{m \in M_{83160}} \frac{1}{m} = \frac{27241}{27720}
+  \approx 0.9827 < 1,
+\]
+so Corollary~\ref{cor:abstract-obstruction} applies with $L = 83160$
+and $M = M_{83160}$; the $\mathbb{Z}$-to-$[0, L)$ equivalence then
+lifts the conclusion from $\mathbb{Z}/83160\mathbb{Z}$ to $\mathbb{Z}$
+exactly as in the proof of Theorem~\ref{thm:numerical-27720}. Since
+$27720 \mid 83160$, this statement strictly contains
+Theorem~\ref{thm:numerical-27720}: every strict admissible covering
+ruled out there has all of its moduli dividing $83160$ as well, and
+is therefore ruled out here too.
+\end{proof}
+
 % [numerical: L ∈ {60, 120, 360, 840, 2520, 27720}]
 \begin{remark}\label{rem:sat-evidence}
 The non-existence of a strict admissible covering at $L = 27720$ is
@@ -336,10 +378,12 @@ established by SAT search in the script
 840\}$ directly (each instance has $D(L) < 1$ and is decided by the
 solver in under four seconds); for $L \in \{2520, 27720\}$ the
 density argument of Theorem~\ref{thm:density} is sharper than CDCL
-search at the chosen budgets. The first $L$ where $D(L) \geq 1$ is
-$L = 360360$, where $D(L) = 1.0237$, at which point the density
-argument no longer applies and the bounded-period question becomes
-genuinely combinatorial.
+search at the chosen budgets. Continuing along this canonical chain,
+the next period at which $D(L) \geq 1$ is $L = 360360$, where $D(L)
+= 1.0237$; the globally smallest period with $D(L) \geq 1$ is in
+fact $L = 55440$ (see \S\ref{sec:concluding}). At such $L$ the
+density argument no longer applies and the bounded-period question
+becomes genuinely combinatorial.
 \end{remark}
 
 \section{Concluding remarks}
@@ -364,16 +408,21 @@ modulus of $L$ does not divide $27720$ -- meaning each gives a
 non-existence statement strictly stronger than Theorem
 \ref{thm:numerical-27720}. The smallest such $L$ is $L = 83160 =
 2^3 \cdot 3^3 \cdot 5 \cdot 7 \cdot 11$, at which $D(83160) =
-27241/27720 \approx 0.9827$; the smallest $L$ that introduces a
-new prime factor is $L = 180180 = 2^2 \cdot 3^2 \cdot 5 \cdot 7
-\cdot 11 \cdot 13$, at which $D(180180) = 173003/180180 \approx
-0.9602$. The density inequality $D(180180) < 1$ has been formally
-verified in Lean (\texttt{formal/Erdos273/NumericalBound180180.lean},
-\texttt{D180180\_lt\_one}); the corresponding bridge lemmas
-identifying $M_{180180}$ with the admissible divisors of $180180$
-are left at \texttt{[sketch]} pending a closure that fits the
-kernel-\texttt{decide} budget on a $36$~GB workstation. The
-smallest $L$ at which $D(L) \geq 1$ is $L = 55440 = 27720 \cdot 2$,
+27241/27720 \approx 0.9827$; the corresponding non-existence
+statement is Theorem~\ref{thm:numerical-83160}, verified above. The
+smallest $L$ that introduces a new prime factor is $L = 180180 =
+2^2 \cdot 3^2 \cdot 5 \cdot 7 \cdot 11 \cdot 13$, at which
+$D(180180) = 173003/180180 \approx 0.9602$. The density inequality
+$D(180180) < 1$ has been formally verified in Lean
+(\texttt{formal/Erdos273/NumericalBound180180.lean},
+\texttt{D180180\_lt\_one}); the full non-existence statement at
+$180180$ follows by the same route used for $L = 83160$ --
+computing the $144$-element divisor lattice as a pointwise product
+of prime-power divisor sets via \texttt{Nat.divisors\_mul} and
+discharging each primality obligation with \texttt{norm\_num}
+rather than kernel \texttt{decide} -- and its Lean transcription is
+the immediate next step. The smallest $L$ at which $D(L) \geq 1$ is
+$L = 55440 = 27720 \cdot 2$,
 where $D(55440) = 6429/6160 \approx 1.0437$ -- so the $2$-adic
 chain $L = 27720 \cdot 2^k$ exits the density-obstruction regime
 at $k = 1$, while the $3$-adic chain
@@ -463,7 +512,19 @@ all in \texttt{formal/Erdos273/NumericalBound27720.lean};
   \item Corollary~\ref{cor:lcm-lower-bound}
         (\texttt{erdos273\_modulus\_not\_dividing\_27720}):
 \end{itemize}
-all in \texttt{formal/Erdos273/IntegerForm.lean}.
+all in \texttt{formal/Erdos273/IntegerForm.lean};
+\begin{itemize}
+  \item the divisor-lattice identity
+        $\texttt{Nat.divisors}\ 83160 = D_{83160}$
+        (\texttt{divisors\_83160\_eq}), via \texttt{Nat.divisors\_mul},
+  \item $D(83160) = 27241/27720 < 1$ (\texttt{D83160\_lt\_one}) and the
+        admissibility of $M_{83160}$ (\texttt{M83160\_admissible}),
+  \item Theorem~\ref{thm:numerical-83160}, both the finite-range form
+        (\texttt{no\_strict\_admissible\_cover\_83160}) and the
+        $\mathbb{Z}$-form
+        (\texttt{no\_strict\_admissible\_covering\_Z\_83160}):
+\end{itemize}
+all in \texttt{formal/Erdos273/NumericalBound83160.lean}.
 \end{sloppypar}
 
 The formalisation defines a \texttt{ResidueClass} structure
