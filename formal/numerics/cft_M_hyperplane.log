@@ -1,0 +1,38 @@
+==============================================================================
+CORRECTED 𝓜 HYPERPLANE-RESTRICTION CFT model (Erdős #273, V3).
+==============================================================================
+mp.dps = 30, N = 20000, K_small = 7
+Coordinate sizes UNCHANGED: |S_j| = p_j (squarefree skeleton).
+ρ_2 = 1 (2 | q-1 always);  ρ_p = 1/(p-1) for odd p (Dirichlet).
+ρ thins the COUNT of admissible hyperplanes, not |S_j|.
+
+[sieve+build: 0.2s, p_N = 224737]
+ρ[0..9] = [1.0, 0.5, 0.25, 0.16666666666666666, 0.1, 0.08333333333333333, 0.0625, 0.05555555555555555, 0.045454545454545456, 0.03571428571428571]
+inv_sf[0..9]  = [0.5, 0.33333, 0.2, 0.14286, 0.09091, 0.07692, 0.05882, 0.06349, 0.05368, 0.04305]
+inv_M (ρ)[0..9] = [0.5, 0.16667, 0.05, 0.02381, 0.00909, 0.00641, 0.00368, 0.00353, 0.00244, 0.00154]
+
+------------------------------------------------------------------------------
+MODEL 0 (no thinning; = squarefree CFT majorant for 𝓜):
+  at C_0=118: small=0.142125 mid=0.853145 tail=9.668e-03  TOTAL=1.00493807
+  at C_0=0  : TOTAL=3.503805  (>>1 ⇒ NOT over-reaching, correct)
+
+------------------------------------------------------------------------------
+MODEL 1 (ρ-thinning of the hyperplane COUNT):
+  OVER-REACH CHECK at C_0=0: small=0.654606 mid=0.098249 tail=6.838e-06
+      TOTAL(C_0=0) = 0.75286250  <1  ==> OVER-REACHES (BOGUS)
+
+  at C_0=118: small=0.000016 mid=0.022745 tail=6.838e-06  TOTAL=0.02276831
+
+  Smallest C_0 with MODEL-1 TOTAL < 1:  C_0 = 0 (already <1 ⇒ BOGUS;
+  bisection skipped — the over-reach makes any reported number an artifact).
+
+==============================================================================
+COMPARISON
+==============================================================================
+  squarefree (validated CFT)  : C_0 = 118
+  BBMST universal (published) : 615,999
+  MODEL 0 (𝓜 majorant)        : 118  (same patterns available)
+  MODEL 1 (𝓜 ρ-thinned count) : over-reaches (bogus)
+
+VERDICT printed by the findings note — see
+  findings/heur-cft-hyperplane-2026-05-28.md
