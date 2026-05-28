@@ -1,0 +1,232 @@
+========================================================================
+L = 60
+  allowed moduli (m in M with m | L, where M = {p-1 : p prime, p>=5}):
+    [4, 6, 10, 12, 30, 60]
+    (6 moduli)
+  density-bound D(L) = sum_{m | L, m in M} 1/m = 0.650000
+    --> D(L) < 1 ==> NO strict covering exists at this L.
+        (Counting proof: each modulus contributes density 1/m,
+         and the moduli are distinct, so total density <= D(L) < 1.)
+  variables: 122 (x_{(a,m)}) + 0 (AMO aux) = 122
+  clauses:   2397
+    cover:        60
+    at-most-one:  2337
+  calling cadical (wall-clock timeout: 5.0s)...
+  SAT-solver runtime: 0.0133 s
+  SAT-solver verdict: UNSAT
+
+  FINAL VERDICT: UNSAT  (proof source: SAT-solver)
+
+  IMPLICATION FOR ERDŐS #273:
+    No strict covering of Z by progressions whose moduli lie
+    in M and all divide L = 60 exists. Therefore any
+    Erdős #273 covering must use a modulus m in M with
+    m NOT dividing 60; equivalently, the LCM of the moduli
+    of any such covering does not divide 60. This is a
+    numerical lower bound on the LCM of any Erdős #273
+    covering.
+  total wall-clock: 0.0180 s
+
+========================================================================
+L = 120
+  allowed moduli (m in M with m | L, where M = {p-1 : p prime, p>=5}):
+    [4, 6, 10, 12, 30, 40, 60]
+    (7 moduli)
+  density-bound D(L) = sum_{m | L, m in M} 1/m = 0.675000
+    --> D(L) < 1 ==> NO strict covering exists at this L.
+        (Counting proof: each modulus contributes density 1/m,
+         and the moduli are distinct, so total density <= D(L) < 1.)
+  variables: 162 (x_{(a,m)}) + 0 (AMO aux) = 162
+  clauses:   3237
+    cover:        120
+    at-most-one:  3117
+  calling cadical (wall-clock timeout: 5.0s)...
+  SAT-solver runtime: 0.0132 s
+  SAT-solver verdict: UNSAT
+
+  FINAL VERDICT: UNSAT  (proof source: SAT-solver)
+
+  IMPLICATION FOR ERDŐS #273:
+    No strict covering of Z by progressions whose moduli lie
+    in M and all divide L = 120 exists. Therefore any
+    Erdős #273 covering must use a modulus m in M with
+    m NOT dividing 120; equivalently, the LCM of the moduli
+    of any such covering does not divide 120. This is a
+    numerical lower bound on the LCM of any Erdős #273
+    covering.
+  total wall-clock: 0.0175 s
+
+========================================================================
+L = 360
+  allowed moduli (m in M with m | L, where M = {p-1 : p prime, p>=5}):
+    [4, 6, 10, 12, 18, 30, 36, 40, 60, 72, 180]
+    (11 moduli)
+  density-bound D(L) = sum_{m | L, m in M} 1/m = 0.777778
+    --> D(L) < 1 ==> NO strict covering exists at this L.
+        (Counting proof: each modulus contributes density 1/m,
+         and the moduli are distinct, so total density <= D(L) < 1.)
+  variables: 468 (x_{(a,m)}) + 254 (AMO aux) = 722
+  clauses:   5268
+    cover:        360
+    at-most-one:  4908
+  calling cadical (wall-clock timeout: 5.0s)...
+  SAT-solver runtime: 0.4122 s
+  SAT-solver verdict: UNSAT
+
+  FINAL VERDICT: UNSAT  (proof source: SAT-solver)
+
+  IMPLICATION FOR ERDŐS #273:
+    No strict covering of Z by progressions whose moduli lie
+    in M and all divide L = 360 exists. Therefore any
+    Erdős #273 covering must use a modulus m in M with
+    m NOT dividing 360; equivalently, the LCM of the moduli
+    of any such covering does not divide 360. This is a
+    numerical lower bound on the LCM of any Erdős #273
+    covering.
+  total wall-clock: 0.4181 s
+
+========================================================================
+L = 840
+  allowed moduli (m in M with m | L, where M = {p-1 : p prime, p>=5}):
+    [4, 6, 10, 12, 28, 30, 40, 42, 60, 70, 210, 280, 420]
+    (13 moduli)
+  density-bound D(L) = sum_{m | L, m in M} 1/m = 0.759524
+    --> D(L) < 1 ==> NO strict covering exists at this L.
+        (Counting proof: each modulus contributes density 1/m,
+         and the moduli are distinct, so total density <= D(L) < 1.)
+  variables: 1212 (x_{(a,m)}) + 984 (AMO aux) = 2196
+  clauses:   9116
+    cover:        840
+    at-most-one:  8276
+  calling cadical (wall-clock timeout: 5.0s)...
+  SAT-solver runtime: 3.9764 s
+  SAT-solver verdict: UNSAT
+
+  FINAL VERDICT: UNSAT  (proof source: SAT-solver)
+
+  IMPLICATION FOR ERDŐS #273:
+    No strict covering of Z by progressions whose moduli lie
+    in M and all divide L = 840 exists. Therefore any
+    Erdős #273 covering must use a modulus m in M with
+    m NOT dividing 840; equivalently, the LCM of the moduli
+    of any such covering does not divide 840. This is a
+    numerical lower bound on the LCM of any Erdős #273
+    covering.
+  total wall-clock: 3.9874 s
+
+========================================================================
+L = 2520
+  allowed moduli (m in M with m | L, where M = {p-1 : p prime, p>=5}):
+    [4, 6, 10, 12, 18, 28, 30, 36, 40, 42, 60, 70, 72, 126, 180, 210, 280, 420, 630, 2520]
+    (20 moduli)
+  density-bound D(L) = sum_{m | L, m in M} 1/m = 0.872222
+    --> D(L) < 1 ==> NO strict covering exists at this L.
+        (Counting proof: each modulus contributes density 1/m,
+         and the moduli are distinct, so total density <= D(L) < 1.)
+  variables: 4794 (x_{(a,m)}) + 4517 (AMO aux) = 9311
+  clauses:   25691
+    cover:        2520
+    at-most-one:  23171
+  calling cadical (wall-clock timeout: 5.0s)...
+  SAT-solver runtime: 5.0048 s
+  SAT-solver verdict: TIMEOUT
+
+  FINAL VERDICT: UNSAT  (proof source: density-bound)
+
+  IMPLICATION FOR ERDŐS #273:
+    No strict covering of Z by progressions whose moduli lie
+    in M and all divide L = 2520 exists. Therefore any
+    Erdős #273 covering must use a modulus m in M with
+    m NOT dividing 2520; equivalently, the LCM of the moduli
+    of any such covering does not divide 2520. This is a
+    numerical lower bound on the LCM of any Erdős #273
+    covering.
+  total wall-clock: 5.0282 s
+
+========================================================================
+L = 27720
+  allowed moduli (m in M with m | L, where M = {p-1 : p prime, p>=5}):
+    [4, 6, 10, 12, 18, 22, 28, 30, 36, 40, 42, 60, 66, 70, 72, 88, 126, 180, 198, 210, 280, 330, 396, 420, 462, 616, 630, 660, 990, 1320, 2310, 2520, 4620, 9240]
+    (34 moduli)
+  density-bound D(L) = sum_{m | L, m in M} 1/m = 0.962626
+    --> D(L) < 1 ==> NO strict covering exists at this L.
+        (Counting proof: each modulus contributes density 1/m,
+         and the moduli are distinct, so total density <= D(L) < 1.)
+  variables: 26112 (x_{(a,m)}) + 25826 (AMO aux) = 51938
+  clauses:   136306
+    cover:        27720
+    at-most-one:  108586
+  calling cadical (wall-clock timeout: 5.0s)...
+  SAT-solver runtime: 5.0070 s
+  SAT-solver verdict: TIMEOUT
+
+  FINAL VERDICT: UNSAT  (proof source: density-bound)
+
+  IMPLICATION FOR ERDŐS #273:
+    No strict covering of Z by progressions whose moduli lie
+    in M and all divide L = 27720 exists. Therefore any
+    Erdős #273 covering must use a modulus m in M with
+    m NOT dividing 27720; equivalently, the LCM of the moduli
+    of any such covering does not divide 27720. This is a
+    numerical lower bound on the LCM of any Erdős #273
+    covering.
+  total wall-clock: 5.2087 s
+
+========================================================================
+L = 360360
+  allowed moduli (m in M with m | L, where M = {p-1 : p prime, p>=5}):
+    [4, 6, 10, 12, 18, 22, 28, 30, 36, 40, 42, 52, 60, 66, 70, 72, 78, 88, 126, 130, 156, 180, 198, 210, 280, 312, 330, 396, 420, 462, 520, 546, 616, 630, 660, 858, 910, 936, 990, 1092, 1170, 1320, 2002, 2310, 2340, 2520, 2730, 2860, 3432, 4620, 6006, 6552, 8008, 8190, 8580, 9240, 16380, 20020, 25740, 36036, 51480, 72072, 120120, 180180]
+    (64 moduli)
+  density-bound D(L) = sum_{m | L, m in M} 1/m = 1.023685
+    --> D(L) >= 1: counting bound does not rule out SAT.
+  variables: 605600 (x_{(a,m)}) + 605291 (AMO aux) = 1210891
+  clauses:   2788016
+    cover:        360360
+    at-most-one:  2427656
+  calling cadical (wall-clock timeout: 5.0s)...
+  SAT-solver runtime: 5.0310 s
+  SAT-solver verdict: TIMEOUT
+
+  FINAL VERDICT: INDETERMINATE  (proof source: (none: SAT timed out and D(L) >= 1))
+
+  IMPLICATION: at L = 360360, the SAT search did not finish within
+    the 5-second timeout and the counting bound is
+    insufficient (D(L) = 1.0237 >= 1). Retry with --timeout
+    larger or use a different solver to settle.
+  total wall-clock: 12.7119 s
+
+========================================================================
+L = 720720
+  allowed moduli (m in M with m | L, where M = {p-1 : p prime, p>=5}):
+    [4, 6, 10, 12, 16, 18, 22, 28, 30, 36, 40, 42, 52, 60, 66, 70, 72, 78, 88, 112, 126, 130, 156, 180, 198, 210, 240, 280, 312, 330, 336, 396, 420, 462, 520, 546, 616, 630, 660, 858, 880, 910, 936, 990, 1008, 1092, 1170, 1320, 1872, 2002, 2310, 2340, 2520, 2730, 2860, 3120, 3432, 3696, 4620, 6006, 6552, 8008, 8190, 8580, 9240, 16380, 18480, 20020, 20592, 21840, 25740, 36036, 48048, 51480, 55440, 65520, 72072, 120120, 180180]
+    (79 moduli)
+  density-bound D(L) = sum_{m | L, m in M} 1/m = 1.105712
+    --> D(L) >= 1: counting bound does not rule out SAT.
+  variables: 846800 (x_{(a,m)}) + 846489 (AMO aux) = 1693289
+  clauses:   4113232
+    cover:        720720
+    at-most-one:  3392512
+  calling cadical (wall-clock timeout: 5.0s)...
+  SAT-solver runtime: 5.0556 s
+  SAT-solver verdict: TIMEOUT
+
+  FINAL VERDICT: INDETERMINATE  (proof source: (none: SAT timed out and D(L) >= 1))
+
+  IMPLICATION: at L = 720720, the SAT search did not finish within
+    the 5-second timeout and the counting bound is
+    insufficient (D(L) = 1.1057 >= 1). Retry with --timeout
+    larger or use a different solver to settle.
+  total wall-clock: 24.6120 s
+
+========================================================================
+SUMMARY TABLE
+========================================================================
+         L   #mods       D(L)     #vars        #cls        SAT           FINAL    min       t_sat       t_min
+        60       6     0.6500       122        2397      UNSAT           UNSAT      -      0.0133      0.0000
+       120       7     0.6750       162        3237      UNSAT           UNSAT      -      0.0132      0.0000
+       360      11     0.7778       468        5268      UNSAT           UNSAT      -      0.4122      0.0000
+       840      13     0.7595      1212        9116      UNSAT           UNSAT      -      3.9764      0.0000
+      2520      20     0.8722      4794       25691    TIMEOUT           UNSAT      -      5.0048      0.0000
+     27720      34     0.9626     26112      136306    TIMEOUT           UNSAT      -      5.0070      0.0000
+    360360      64     1.0237    605600     2788016    TIMEOUT   INDETERMINATE      -      5.0310      0.0000
+    720720      79     1.1057    846800     4113232    TIMEOUT   INDETERMINATE      -      5.0556      0.0000

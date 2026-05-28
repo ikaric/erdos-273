@@ -1,0 +1,27 @@
+L = 360
+  allowed moduli (m in M with m | L, where M = {p-1 : p prime, p>=5}):
+    [4, 6, 10, 12, 18, 30, 36, 40, 60, 72, 180]
+    (11 moduli)
+  density-bound D(L) = sum_{m | L, m in M} 1/m = 0.777778
+    --> D(L) < 1 ==> NO strict covering exists at this L.
+        (Counting proof: each modulus contributes density 1/m,
+         and the moduli are distinct, so total density <= D(L) < 1.)
+  variables: 468 (x_{(a,m)}) + 254 (AMO aux) = 722
+  clauses:   5268
+    cover:        360
+    at-most-one:  4908
+  calling cadical (wall-clock timeout: 30.0s)...
+  SAT-solver runtime: 0.4150 s
+  SAT-solver verdict: UNSAT
+
+  FINAL VERDICT: UNSAT  (proof source: SAT-solver)
+
+  IMPLICATION FOR ERDŐS #273:
+    No strict covering of Z by progressions whose moduli lie
+    in M and all divide L = 360 exists. Therefore any
+    Erdős #273 covering must use a modulus m in M with
+    m NOT dividing 360; equivalently, the LCM of the moduli
+    of any such covering does not divide 360. This is a
+    numerical lower bound on the LCM of any Erdős #273
+    covering.
+  total wall-clock: 0.4222 s

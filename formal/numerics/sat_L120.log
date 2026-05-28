@@ -1,0 +1,27 @@
+L = 120
+  allowed moduli (m in M with m | L, where M = {p-1 : p prime, p>=5}):
+    [4, 6, 10, 12, 30, 40, 60]
+    (7 moduli)
+  density-bound D(L) = sum_{m | L, m in M} 1/m = 0.675000
+    --> D(L) < 1 ==> NO strict covering exists at this L.
+        (Counting proof: each modulus contributes density 1/m,
+         and the moduli are distinct, so total density <= D(L) < 1.)
+  variables: 162 (x_{(a,m)}) + 0 (AMO aux) = 162
+  clauses:   3237
+    cover:        120
+    at-most-one:  3117
+  calling cadical (wall-clock timeout: 30.0s)...
+  SAT-solver runtime: 0.0153 s
+  SAT-solver verdict: UNSAT
+
+  FINAL VERDICT: UNSAT  (proof source: SAT-solver)
+
+  IMPLICATION FOR ERDŐS #273:
+    No strict covering of Z by progressions whose moduli lie
+    in M and all divide L = 120 exists. Therefore any
+    Erdős #273 covering must use a modulus m in M with
+    m NOT dividing 120; equivalently, the LCM of the moduli
+    of any such covering does not divide 120. This is a
+    numerical lower bound on the LCM of any Erdős #273
+    covering.
+  total wall-clock: 0.0213 s

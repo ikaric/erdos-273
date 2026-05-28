@@ -90,3 +90,23 @@ against Mathlib, and honest tagging
 The Status / Verified / Open blocks above are bounded by HTML
 comment sentinels and are refreshed automatically at the end of
 every `/solve` session — do not hand-edit between the markers.
+
+## Setup requirements (beyond the harness defaults)
+
+In addition to the harness's defaults (Lean via `elan`, Mathlib via
+`lake exe cache get`, Python via `uv sync`, `tectonic`, `gh`), this
+clone uses:
+
+- **`cadical`** — DIMACS SAT solver used by `formal/numerics/sat_covering.py`
+  for the bounded-period strict-covering search of Erdős #273.
+  Install via `brew install cadical` (verified at 3.0.0).
+- **`kissat`** — alternative DIMACS SAT solver, typically stronger
+  than CaDiCaL on hard UNSAT instances. Used optionally with
+  `--solver kissat` flag. Install via `brew install kissat`
+  (verified at 4.0.4).
+
+Both are invoked as subprocesses via `subprocess.run(..., timeout=…)`,
+so wall-clock timeouts are deterministic. The Python `python-sat`
+package (in `pyproject.toml`) handles CNF construction and AMO/
+cardinality encodings; we shell out to the standalone binaries for
+the SAT call itself.

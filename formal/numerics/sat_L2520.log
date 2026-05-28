@@ -1,0 +1,27 @@
+L = 2520
+  allowed moduli (m in M with m | L, where M = {p-1 : p prime, p>=5}):
+    [4, 6, 10, 12, 18, 28, 30, 36, 40, 42, 60, 70, 72, 126, 180, 210, 280, 420, 630, 2520]
+    (20 moduli)
+  density-bound D(L) = sum_{m | L, m in M} 1/m = 0.872222
+    --> D(L) < 1 ==> NO strict covering exists at this L.
+        (Counting proof: each modulus contributes density 1/m,
+         and the moduli are distinct, so total density <= D(L) < 1.)
+  variables: 4794 (x_{(a,m)}) + 4517 (AMO aux) = 9311
+  clauses:   25691
+    cover:        2520
+    at-most-one:  23171
+  calling cadical (wall-clock timeout: 5.0s)...
+  SAT-solver runtime: 5.0060 s
+  SAT-solver verdict: TIMEOUT
+
+  FINAL VERDICT: UNSAT  (proof source: density-bound)
+
+  IMPLICATION FOR ERDŐS #273:
+    No strict covering of Z by progressions whose moduli lie
+    in M and all divide L = 2520 exists. Therefore any
+    Erdős #273 covering must use a modulus m in M with
+    m NOT dividing 2520; equivalently, the LCM of the moduli
+    of any such covering does not divide 2520. This is a
+    numerical lower bound on the LCM of any Erdős #273
+    covering.
+  total wall-clock: 5.0305 s

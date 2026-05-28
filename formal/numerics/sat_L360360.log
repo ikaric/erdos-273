@@ -1,0 +1,21 @@
+L = 360360
+  allowed moduli (m in M with m | L, where M = {p-1 : p prime, p>=5}):
+    [4, 6, 10, 12, 18, 22, 28, 30, 36, 40, 42, 52, 60, 66, 70, 72, 78, 88, 126, 130, 156, 180, 198, 210, 280, 312, 330, 396, 420, 462, 520, 546, 616, 630, 660, 858, 910, 936, 990, 1092, 1170, 1320, 2002, 2310, 2340, 2520, 2730, 2860, 3432, 4620, 6006, 6552, 8008, 8190, 8580, 9240, 16380, 20020, 25740, 36036, 51480, 72072, 120120, 180180]
+    (64 moduli)
+  density-bound D(L) = sum_{m | L, m in M} 1/m = 1.023685
+    --> D(L) >= 1: counting bound does not rule out SAT.
+  variables: 605600 (x_{(a,m)}) + 605291 (AMO aux) = 1210891
+  clauses:   2788016
+    cover:        360360
+    at-most-one:  2427656
+  calling cadical (wall-clock timeout: 5.0s)...
+  SAT-solver runtime: 5.0341 s
+  SAT-solver verdict: TIMEOUT
+
+  FINAL VERDICT: INDETERMINATE  (proof source: (none: SAT timed out and D(L) >= 1))
+
+  IMPLICATION: at L = 360360, the SAT search did not finish within
+    the 5-second timeout and the counting bound is
+    insufficient (D(L) = 1.0237 >= 1). Retry with --timeout
+    larger or use a different solver to settle.
+  total wall-clock: 12.7572 s
