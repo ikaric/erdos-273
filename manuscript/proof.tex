@@ -497,20 +497,32 @@ hypothesis-free auxiliary result -- Schinzel's conjecture, proved as
 \cite{BBMS2022} Theorem~1.2, that any covering contains a pair $m_i
 \mid m_j$ -- is automatically satisfied by $\mathcal{M}$ (which is
 rich in divisibility pairs) and so yields nothing beyond
-Proposition~\ref{prop:density-diverges}. The route to a
-sharper-than-$10^{16}$ bound specialised to $\mathcal{M}$ runs
-through the Cummings--Filaseta--Trifonov refinement
+Proposition~\ref{prop:density-diverges}. One might hope to sharpen the
+universal bound by exploiting the arithmetic of $\mathcal{M}$ inside
+the Cummings--Filaseta--Trifonov refinement
 \cite{CummingsFilasetaTrifonov2022}, whose squarefree-moduli bound of
 $\leq 118$ is, mechanically, BBMST's distortion theorem instantiated
 on a hyperplane reformulation. A numerical reconstruction of that
 optimisation reproduces the published squarefree value to eight
-significant figures; it also shows that the $\mathcal{M}$-density
-$1/(p-1)$ must enter through the \emph{count of admissible
-hyperplanes} (how often $p \mid q - 1$ as $q$ ranges over primes,
-governed by Siegel--Walfisz) rather than as a per-coordinate weight,
-the latter substitution over-counting the sparsity. Carrying out the
-hyperplane-restriction count is the concrete path for a future
-session.
+significant figures, confirming the engine; but it also reveals an
+intrinsic obstruction to specialising it to $\mathcal{M}$. The natural
+$\mathcal{M}$-input is the Dirichlet density $1/(p-1)$ of primes $q$
+with $p \mid q - 1$. This density measures sparsity \emph{among the
+primes $q$}, whereas the distortion bound counts the
+prime-support \emph{patterns} that the moduli realise -- and every
+finite pattern $\{p_1, \dots, p_r\}$ is realised by some
+$m = q - 1 \in \mathcal{M}$, since $q \equiv 1 \pmod{p_1 \cdots p_r}$
+has prime solutions by Dirichlet's theorem. The sparsity is therefore
+invisible to the count: inserting the $1/(p-1)$ factor (whether as a
+per-coordinate weight or on the hyperplane count, which one checks are
+algebraically identical) discounts a saving the covering never pays,
+and over-reaches to the false conclusion that $\mathcal{M}$ cannot
+cover $\mathbb{Z}$ at all. Consequently the distortion method yields
+for $\mathcal{M}$ only the bound it gives for arbitrary distinct
+moduli, with no improvement from the $p - 1$ structure. A genuinely
+sharper non-existence result, if one exists, must come from a
+mechanism that sees more than the prime-support patterns of the
+moduli.
 
 \appendix
 
