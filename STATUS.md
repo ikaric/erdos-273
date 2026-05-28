@@ -1,9 +1,12 @@
 # Status
 
-Current focus: project just initialized; first /solve session
-will run librarian survey + grounded sketch.
+Current focus: first /solve session — parallel dispatch of (a)
+librarian survey of post-2020 covering-system literature with
+$p-1$ specialization angles, (b) formalist seeding of
+`Erdos273.CoveringSystem` definitions (V4), (c) computationalist
+seeding of `formal/numerics/sat_covering.py` SAT-encoding (V1).
 
-Last commit: target commit (this commit).
+Last commit: 8ee65a0 target: initialize for Erdős Problem #273.
 
 Blocker: none.
 
