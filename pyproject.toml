@@ -1,0 +1,20 @@
+[project]
+name = "formalia-numerics"
+version = "0.1.0"
+description = "Numerical scripts for the formalia proof harness clone (computationalist agent)."
+requires-python = ">=3.11"
+dependencies = [
+    "sympy",      # symbolic math, primality, factoring
+    "gmpy2",      # arbitrary-precision integers (10-100x faster than int)
+    "numpy",      # numerical arrays
+    "scipy",      # optimization, linalg, special functions
+    "networkx",   # graph algorithms (combinatorial problems)
+    "python-sat", # SAT solver bindings (complexity-theorist encodings)
+]
+
+# Per-clone numerical scripts live in formal/numerics/. Agents extend
+# dependencies via `uv add <pkg>` (or `uv pip install <pkg>` for ad-hoc),
+# which writes the lockfile so the next session reproduces.
+
+[tool.uv]
+package = false

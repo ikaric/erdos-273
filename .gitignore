@@ -1,0 +1,32 @@
+# Python virtualenv (per-clone; created by /target)
+.venv/
+__pycache__/
+*.pyc
+
+# LaTeX intermediate artifacts (committed: .tex and .pdf only)
+manuscript/*.aux
+manuscript/*.log
+manuscript/*.out
+manuscript/*.toc
+manuscript/*.synctex.gz
+manuscript/*.fls
+manuscript/*.fdb_latexmk
+
+# Lake build artifacts (also covered by formal/.gitignore)
+formal/.lake/
+formal/build/
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Editor junk
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Claude runtime / temporary
+.claude/local/
