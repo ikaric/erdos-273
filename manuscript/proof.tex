@@ -282,15 +282,19 @@ The common denominator divides $\operatorname{lcm}(M_{27720}) =
 27720$; the sum equals $953/990$, which is strictly less than~$1$.
 \end{proof}
 
-% [verified: formal/Erdos273/NumericalBound27720.lean]
+% [verified: formal/Erdos273/IntegerForm.lean]
 \begin{theorem}[Numerical lower bound on Erdős \#273]
 \label{thm:numerical-27720}
 There is no strict covering of\/ $\mathbb{Z}$ by residue classes
 whose moduli all lie in $\mathcal{M}$ and all divide $27720 = 2^3
 \cdot 3^2 \cdot 5 \cdot 7 \cdot 11$.\footnote{Formally verified in
 Lean 4 + Mathlib (commit \texttt{c5ea00351c28}); see
-\texttt{formal/Erdos273/NumericalBound27720.lean}, theorem
-\texttt{no\_strict\_admissible\_cover\_27720}.}
+\texttt{formal/Erdos273/IntegerForm.lean}, theorem
+\texttt{no\_strict\_admissible\_covering\_Z\_27720}, which combines
+the finite-range theorem \texttt{no\_strict\_admissible\_cover\_27720}
+in \texttt{formal/Erdos273/NumericalBound27720.lean} with the
+$\mathbb{Z}$-to-$[0, L)$ equivalence lemma
+\texttt{covers\_int\_iff\_covers\_range\_L}.}
 \end{theorem}
 \begin{proof}
 Since $27720 \in \mathbb{N}_{\geq 1}$ and every element of
@@ -299,24 +303,27 @@ hypotheses of Corollary~\ref{cor:abstract-obstruction} apply with
 $L = 27720$ and $M = M_{27720}$. The inequality $D(27720) < 1$
 follows from Lemma~\ref{lem:D27720}. Hence no strict covering of
 $\mathbb{Z}/27720\mathbb{Z}$ by residue classes with moduli in
-$M_{27720}$ exists. Lifting from $\mathbb{Z}/27720\mathbb{Z}$ to
-$\mathbb{Z}$: any progression with modulus dividing $27720$ is
-$27720$-periodic, so covering $\mathbb{Z}$ is equivalent to
-covering $\mathbb{Z}/27720\mathbb{Z}$ for such progressions, and
-the latter has been ruled out.
+$M_{27720}$ exists. To lift from $\mathbb{Z}/27720\mathbb{Z}$ to
+$\mathbb{Z}$ we use the standard equivalence: a finite family $S$
+of residue classes whose moduli all divide $L$ covers $\mathbb{Z}$
+if and only if it covers $\{0, 1, \ldots, L - 1\}$. The forward
+direction is trivial; the reverse follows by reducing any
+$n \in \mathbb{Z}$ to its representative
+$r := n \bmod L \in [0, L)$, observing that $n \equiv r \pmod L$
+and therefore $n \equiv r \pmod{m}$ for every modulus $m \mid L$.
+This equivalence is the lemma
+\texttt{covers\_int\_iff\_covers\_range\_L} cited in the footnote.
 \end{proof}
 
+% [verified: formal/Erdos273/IntegerForm.lean]
 \begin{corollary}\label{cor:lcm-lower-bound}
-If a strict covering of $\mathbb{Z}$ exists whose moduli all lie in
-$\mathcal{M}$ (i.e., if Erdős Conjecture~\ref{conj:e273} has a
-positive answer), then the least common multiple of its moduli is
-not a divisor of $27720$; equivalently, the covering must use at
-least one modulus $m \in \mathcal{M}$ with $m \nmid 27720$.
+If Erdős Conjecture~\ref{conj:e273} has a positive answer, then any
+witnessing strict covering must use at least one modulus
+$m \in \mathcal{M}$ with $m \nmid 27720$.
 \end{corollary}
 \begin{proof}
-Immediate from Theorem~\ref{thm:numerical-27720} by
-contraposition: if every modulus divides $27720$, the LCM divides
-$27720$, contradicting non-existence.
+The contrapositive of Theorem~\ref{thm:numerical-27720}: if every
+modulus divided $27720$, the covering would be ruled out.
 \end{proof}
 
 % [numerical: L ∈ {60, 120, 360, 840, 2520, 27720}]
@@ -344,14 +351,39 @@ arithmetic content -- they apply to any set of admissible moduli
 $\mathcal{M}$, not just $\{p - 1 : p \geq 5 \text{ prime}\}$. The
 numerical bound at $L = 27720$
 (Theorem~\ref{thm:numerical-27720}) is one instance; the same
-machinery can be re-applied at other periods. The first arithmetic
-fact one would attack next is the question of whether $D(L)$ stays
-strictly below~$1$ along a useful sequence of $L$. As noted in
-Remark~\ref{rem:sat-evidence}, $D(360360) > 1$, so the density
-obstruction alone cannot be pushed further along the canonical
-``small-LCM'' sequence; ruling out covering at larger $L$ requires
-either bounded-period SAT search (currently indeterminate within a
-five-second budget per instance) or a deeper non-existence argument.
+machinery can be re-applied at other periods.
+
+\paragraph{Extending the density obstruction beyond $L = 27720$.}
+An exact-rational scan of $D(L)$ over candidate periods $L \leq 9
+\cdot 10^5$ (script
+\texttt{formal/numerics/density\_scan.py})\footnote{Performed in
+\texttt{fractions.Fraction} arithmetic; no floating-point
+arithmetic enters the verdict.} identifies $27$ further values
+$L > 27720$ at which $D(L) < 1$ holds and at least one admissible
+modulus of $L$ does not divide $27720$ -- meaning each gives a
+non-existence statement strictly stronger than Theorem
+\ref{thm:numerical-27720}. The smallest such $L$ is $L = 83160 =
+2^3 \cdot 3^3 \cdot 5 \cdot 7 \cdot 11$, at which $D(83160) =
+27241/27720 \approx 0.9827$; the smallest $L$ that introduces a
+new prime factor is $L = 180180 = 2^2 \cdot 3^2 \cdot 5 \cdot 7
+\cdot 11 \cdot 13$, at which $D(180180) = 173003/180180 \approx
+0.9602$. The density inequality $D(180180) < 1$ has been formally
+verified in Lean (\texttt{formal/Erdos273/NumericalBound180180.lean},
+\texttt{D180180\_lt\_one}); the corresponding bridge lemmas
+identifying $M_{180180}$ with the admissible divisors of $180180$
+are left at \texttt{[sketch]} pending a closure that fits the
+kernel-\texttt{decide} budget on a $36$~GB workstation. The
+smallest $L$ at which $D(L) \geq 1$ is $L = 55440 = 27720 \cdot 2$,
+where $D(55440) = 6429/6160 \approx 1.0437$ -- so the $2$-adic
+chain $L = 27720 \cdot 2^k$ exits the density-obstruction regime
+at $k = 1$, while the $3$-adic chain
+$L = 27720 \cdot 3^k$ stays below~$1$ at least through $k = 3$
+(at $L = 748440$).
+
+\paragraph{Outside the bounded-period regime.}
+Ruling out covering at larger $L$ requires either bounded-period
+SAT search (currently indeterminate within a five-second budget
+per instance) or a deeper non-existence argument.
 
 The literature offers two such deeper arguments. Hough's
 distortion method \cite{Hough2015} and its strengthening by
@@ -365,9 +397,18 @@ theorem does not apply uniformly to $\mathcal{M}$. Their
 auxiliary results, however -- for example the
 divisibility-pair theorem (any covering contains a pair $m_i \mid
 m_j$) -- do constrain admissible coverings without invoking the
-density hypothesis. Adapting these constraints to $\mathcal{M}$,
-and combining them with the bounded-period density obstruction
-established here, is a natural direction for further work.
+density hypothesis. The route to a sharper-than-$10^{16}$ bound
+specialised to $\mathcal{M}$ runs through the
+Cummings--Filaseta--Trifonov refinement
+\cite{CummingsFilasetaTrifonov2022}: their squarefree-moduli bound of
+$\leq 118$ is, mechanically, BBMST's general distortion theorem
+instantiated on a hyperplane reformulation whose sizes are dictated
+by the moduli set's prime-multiplicity distribution. For
+$\mathcal{M}$ the relevant distribution is
+$\nu_{p}(q - 1)$ as $q$ ranges over primes $\geq 5$, which by the
+Siegel--Walfisz theorem has explicit density $1/(p - 1) p^{\gamma -
+1}$; substituting this into BBMST's moment bounds is the concrete
+path for a future session.
 
 \appendix
 
@@ -410,10 +451,19 @@ all in \texttt{formal/Erdos273/CoveringSystem.lean}.
         cardinality (\texttt{M27720\_card}),
   \item Lemma~\ref{lem:D27720}
         (\texttt{D27720\_lt\_one}),
-  \item Theorem~\ref{thm:numerical-27720}
+  \item Finite-range form of Theorem~\ref{thm:numerical-27720}
         (\texttt{no\_strict\_admissible\_cover\_27720}):
 \end{itemize}
-all in \texttt{formal/Erdos273/NumericalBound27720.lean}.
+all in \texttt{formal/Erdos273/NumericalBound27720.lean};
+\begin{itemize}
+  \item the $\mathbb{Z}$-to-$[0, L)$ equivalence
+        (\texttt{covers\_int\_iff\_covers\_range\_L}),
+  \item Theorem~\ref{thm:numerical-27720}, $\mathbb{Z}$-form
+        (\texttt{no\_strict\_admissible\_covering\_Z\_27720}),
+  \item Corollary~\ref{cor:lcm-lower-bound}
+        (\texttt{erdos273\_modulus\_not\_dividing\_27720}):
+\end{itemize}
+all in \texttt{formal/Erdos273/IntegerForm.lean}.
 \end{sloppypar}
 
 The formalisation defines a \texttt{ResidueClass} structure
@@ -472,6 +522,13 @@ P.~Balister, B.~Bollobás, R.~Morris, and J.~Sahasrabudhe,
 \emph{On the Erdős covering problem: the density of the uncovered set},
 Inventiones Mathematicae \textbf{228} (2022), no.~1, 377--414.
 \href{https://arxiv.org/abs/1811.03547}{arXiv:1811.03547}.
+
+\bibitem{CummingsFilasetaTrifonov2022}
+M.~Cummings, M.~Filaseta, and O.~Trifonov,
+\emph{An upper bound for the minimum modulus in a covering system
+with squarefree moduli},
+preprint, 2022.
+\href{https://arxiv.org/abs/2211.08548}{arXiv:2211.08548}.
 
 \bibitem{FormalConjectures}
 DeepMind,
