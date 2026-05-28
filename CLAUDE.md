@@ -626,17 +626,17 @@ email into commit history. Verify and switch with:
 
 ```sh
 gh auth status                       # shows the active account
-gh auth switch -u <GH_USERNAME>
+gh auth switch -u ikaric
 gh auth setup-git
 ```
 
 The remote URL of *this clone* lives at
-`https://github.com/<GH_USERNAME>/<repo-name>.git`. Read the actual
+`https://github.com/ikaric/<repo-name>.git`. Read the actual
 value from `git remote -v`.
 
 ### Commit authorship — never co-author with Claude
 
-Every commit's author is **<GIT_USER_NAME> <<GIT_USER_EMAIL>>** — the
+Every commit's author is **Ilhan Karić <ilhan.karic@gmail.com>** — the
 repo-local git config written by `make init`.
 
 - **Do not** add `Co-Authored-By: Claude <…>` trailers.

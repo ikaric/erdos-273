@@ -23,7 +23,7 @@ Run in parallel:
 
 ```sh
 grep -L "FORMALIA_TEMPLATE" manuscript/proof.tex     # template marker should be ABSENT
-gh auth status 2>&1 | head -3                     # active account = <GH_USERNAME>
+gh auth status 2>&1 | head -3                     # active account = ikaric
 git remote -v                                     # remote sanity
 git pull --rebase origin main                     # ensure up-to-date
 ```
@@ -31,7 +31,7 @@ git pull --rebase origin main                     # ensure up-to-date
 If `FORMALIA_TEMPLATE` marker is **present**: this clone has not been
 initialized. Refuse to run; tell the user to run `/target` first.
 
-If the active gh account is not `<GH_USERNAME>`: `gh auth switch -u <GH_USERNAME>
+If the active gh account is not `ikaric`: `gh auth switch -u ikaric
 && gh auth setup-git`.
 
 # Mode selection
@@ -296,7 +296,7 @@ Output 3–4 sentences:
 - `git pull --rebase origin main` before any edits.
 - Push after every commit so the user can see the result on GitHub
   immediately.
-- The repo-local git config (`<GIT_USER_NAME> <<GIT_USER_EMAIL>>`,
+- The repo-local git config (`Ilhan Karić <ilhan.karic@gmail.com>`,
   set by `make init`) is correct; do not change it.
 - Never include `Co-Authored-By: Claude` trailers, `Generated with
   Claude Code` footers, or any mention of the agent runtime in commit

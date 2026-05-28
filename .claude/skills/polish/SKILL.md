@@ -30,8 +30,8 @@ Refuse to run if:
 
 - The `FORMALIA_TEMPLATE` marker is present → tell the user to run
   `/target` first.
-- `make init` placeholders (`<GH_USERNAME>`, `<GIT_USER_NAME>`,
-  `<GIT_USER_EMAIL>`) still appear in CLAUDE.md or README.md →
+- `make init` placeholders (`ikaric`, `Ilhan Karić`,
+  `ilhan.karic@gmail.com`) still appear in CLAUDE.md or README.md →
   tell the user to run `make init` first.
 - `lake build` exits non-zero → fix the build first by re-running
   `/solve` or by manual repair; `polish` will not paper over

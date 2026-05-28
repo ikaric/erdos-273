@@ -210,21 +210,21 @@ there.
 The per-clone GitHub identity is set by `make init` (see the
 README's Quick Start). The expected values for this clone:
 
-- Username: **`<GH_USERNAME>`** (email: `<GIT_USER_EMAIL>`)
+- Username: **`ikaric`** (email: `ilhan.karic@gmail.com`)
 - Remote URL: read it from `git remote -v` — varies per clone, but
-  the namespace is `<GH_USERNAME>/<repo-name>`.
+  the namespace is `ikaric/<repo-name>`.
 
 If `gh auth status` shows a different active account, switch first
 — pushing under the wrong identity leaks the wrong email into the
 public git history:
 
 ```sh
-gh auth switch -u <GH_USERNAME>
+gh auth switch -u ikaric
 gh auth setup-git
 ```
 
-The repo-local git config is set to `<GIT_USER_NAME>
-<<GIT_USER_EMAIL>>`; do not change it. If `grep -E
+The repo-local git config is set to `Ilhan Karić
+<ilhan.karic@gmail.com>`; do not change it. If `grep -E
 '<(GH_USERNAME|GIT_USER_NAME|GIT_USER_EMAIL)>' CLAUDE.md` returns a
 hit, `make init` was skipped — refuse to push and ask the user to
 run it.
@@ -345,8 +345,8 @@ and should be issued as **parallel Bash calls in a single message**:
    clone wasn't `/target`-bootstrapped properly; run `uv sync` (or
    `uv venv && uv pip sync uv.lock`) before continuing.
 2. `gh auth status 2>&1 | head -20` — verify the active account is
-   `<GH_USERNAME>` (the one set by `make init`). If a different
-   account is active, switch with `gh auth switch -u <GH_USERNAME>
+   `ikaric` (the one set by `make init`). If a different
+   account is active, switch with `gh auth switch -u ikaric
    && gh auth setup-git`.
 3. `git pull --rebase origin main` — the user might have edited
    remotely.
@@ -519,7 +519,7 @@ have roughly this shape:
 
 ```latex
 \title{<problem display name>}
-\author{<GIT_USER_NAME>}
+\author{Ilhan Karić}
 \date{\today}
 
 \begin{document}
@@ -857,7 +857,7 @@ and issue numbers (e.g., "Closes #17" to auto-close on push).>
 ```
 
 **Commit authorship is non-negotiable.** Every commit is authored as
-**<GIT_USER_NAME> <<GIT_USER_EMAIL>>** (the repo-local git config
+**Ilhan Karić <ilhan.karic@gmail.com>** (the repo-local git config
 already set by `make init`). **Never** include:
 - `Co-Authored-By: Claude …` trailers
 - `Generated with Claude Code` footers

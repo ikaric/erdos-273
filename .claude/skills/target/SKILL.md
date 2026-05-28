@@ -36,17 +36,17 @@ git remote -v
 git config user.name; git config user.email
 ```
 
-The active `gh` account must be `<GH_USERNAME>` (the value the user
+The active `gh` account must be `ikaric` (the value the user
 provided to `make init`). The remote must be
-`https://github.com/<GH_USERNAME>/<something>.git`. The git user
-must be `<GIT_USER_NAME> <<GIT_USER_EMAIL>>`. Fix any of these
+`https://github.com/ikaric/<something>.git`. The git user
+must be `Ilhan Karić <ilhan.karic@gmail.com>`. Fix any of these
 before continuing:
 
-- account: `gh auth switch -u <GH_USERNAME> && gh auth setup-git`
+- account: `gh auth switch -u ikaric && gh auth setup-git`
 - local identity: re-run `make init` (it sets `user.name` and
   `user.email` for the repo), or set them manually with
-  `git config user.name "<GIT_USER_NAME>" && git config user.email
-  "<GIT_USER_EMAIL>"`.
+  `git config user.name "Ilhan Karić" && git config user.email
+  "ilhan.karic@gmail.com"`.
 
 If `grep -E '<(GH_USERNAME|GIT_USER_NAME|GIT_USER_EMAIL)>' CLAUDE.md`
 returns a hit, `make init` was never run on this clone. Refuse to
@@ -217,7 +217,7 @@ After elicitation:
 
    ```latex
    \title{<problem display name>}
-   \author{<GIT_USER_NAME>}
+   \author{Ilhan Karić}
    \date{\today}
 
    \begin{document}
@@ -299,7 +299,7 @@ After elicitation:
 
    Autonomous Lean 4 proof attempt against
    [Mathlib](https://github.com/leanprover-community/mathlib4),
-   driven by the [formalia](https://github.com/<GH_USERNAME>/formalia)
+   driven by the [formalia](https://github.com/ikaric/formalia)
    harness. The Lean kernel is the trust root: every claim tagged
    `[verified]` compiles under `lake build` with `#print axioms`
    reporting only the three foundational axioms.
@@ -353,7 +353,7 @@ After elicitation:
    ## Harness
 
    This clone runs the
-   [formalia](https://github.com/<GH_USERNAME>/formalia)
+   [formalia](https://github.com/ikaric/formalia)
    autonomous-proof harness: twelve specialist subagents under
    `.claude/agents/`, three slash-commands (`/target`, `/solve`,
    `/vector`) under `.claude/skills/`, a mandatory novelty gate
@@ -376,7 +376,7 @@ After elicitation:
    - The `<DisplayName>` in path links must be the per-clone Lake
      identifier you computed in the "Compute the Lake identifier"
      step (not the literal string `<DisplayName>`).
-   - The harness link target `<GH_USERNAME>/formalia` should be
+   - The harness link target `ikaric/formalia` should be
      the value already substituted by `make init`. If the bare
      placeholder still appears, `make init` was never run — abort
      and tell the user.

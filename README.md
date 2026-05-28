@@ -10,7 +10,7 @@
 [![Lean 4](https://img.shields.io/badge/Lean-4.30.0-1A237E?logo=lean&logoColor=white)](https://leanprover.github.io)
 [![Mathlib](https://img.shields.io/badge/Mathlib-pinned%20per%20clone-3F51B5)](https://github.com/leanprover-community/mathlib4)
 [![Claude Code](https://img.shields.io/badge/Claude%20Code-agent%20harness-D97757)](https://docs.claude.com/claude-code)
-[![GitHub Template](https://img.shields.io/badge/GitHub-Template-2EA44F?logo=github&logoColor=white)](https://github.com/<GH_USERNAME>/formalia/generate)
+[![GitHub Template](https://img.shields.io/badge/GitHub-Template-2EA44F?logo=github&logoColor=white)](https://github.com/ikaric/formalia/generate)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 </div>
