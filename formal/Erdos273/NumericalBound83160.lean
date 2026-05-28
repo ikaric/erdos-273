@@ -4,11 +4,11 @@ Numerical bound `D(83160) < 1` and the resulting verified corollary
 
 Sibling to `formal/Erdos273/NumericalBound27720.lean`. The period
 `83160 = 2³ · 3³ · 5 · 7 · 11` strengthens the `L = 27720` result
-by introducing the modulus `108 = 109 - 1` (and its multiples in
-`M83160`) coming from the extra factor of `3`. Since
-`27720 ∣ 83160`, the new content over the existing 27720 bound is
-exactly the family of admissible moduli that are multiples of `108`
-but still divide `83160`.
+by introducing admissible divisors carrying the extra factor of `3`
+(the smallest is `108 = 109 - 1`). Since `27720 ∣ 83160`, the new
+content over the existing 27720 bound is exactly the family of
+admissible divisors of `83160` that are divisible by `3³ = 27` (and
+hence do not divide `27720 = 2³ · 3² · 5 · 7 · 11`).
 
 The set
   `M₈₃₁₆₀ = { m ∈ ℕ : m ∣ 83160, m + 1 prime, m + 1 ≥ 5 }`
@@ -20,8 +20,8 @@ with slack `479 / 27720 ≈ 0.0173`.
 
 Compared to `M27720`, the new elements are
 `{108, 270, 378, 540, 756, 2376, 2970, 4158, 7560, 8316, 16632}` —
-all of the form `m = 3^a · …` exploiting the additional factor of
-`3` in `83160 / 27720 = 3`.
+exactly the admissible divisors of `83160` divisible by `3³ = 27`,
+exploiting the additional factor of `3` in `83160 / 27720 = 3`.
 
 **Performance note.** The naive `by decide` route — letting the
 kernel reduce `Nat.divisors 83160` by scanning the range `[1, 83161)`
@@ -57,8 +57,8 @@ and `m + 1 ≥ 5`, computed from the divisor lattice of
 
 Compared to `M27720`, the 11 new elements are
 `{108, 270, 378, 540, 756, 2376, 2970, 4158, 7560, 8316, 16632}` —
-all multiples of `108 = 109 − 1`, which becomes admissible because
-`83160` carries `3³` (and `27720` only `3²`). -/
+exactly the admissible divisors divisible by `3³ = 27`, which become
+available because `83160` carries `3³` (and `27720` only `3²`). -/
 def M83160 : Finset ℕ :=
   ({4, 6, 10, 12, 18, 22, 28, 30, 36, 40, 42, 60, 66, 70, 72, 88, 108,
     126, 180, 198, 210, 270, 280, 330, 378, 396, 420, 462, 540, 616,
@@ -153,9 +153,9 @@ theorem mem_M83160_of_admissible_dvd
 exists.
 
 Strengthens `no_strict_admissible_cover_27720` by introducing the
-admissible modulus `108 = 109 - 1` (and its multiples in `M83160`)
-that become available once the period carries `3³` instead of just
-`3²`. Since `27720 ∣ 83160`, this strictly contains the previous
+admissible divisors of `83160` divisible by `3³` (the smallest is
+`108 = 109 - 1`), which become available once the period carries `3³`
+instead of just `3²`. Since `27720 ∣ 83160`, this strictly contains the previous
 obstruction: any strict admissible cover with all moduli dividing
 `27720` also has all moduli dividing `83160` (and is thus excluded
 by the present theorem), and additionally we now rule out covers
