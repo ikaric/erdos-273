@@ -461,34 +461,56 @@ $L = 27720 \cdot 3^k$ stays below~$1$ at least through $k = 3$
 (at $L = 748440$).
 
 \paragraph{Outside the bounded-period regime.}
-Ruling out covering at larger $L$ requires either bounded-period
-SAT search (currently indeterminate within a five-second budget
-per instance) or a deeper non-existence argument.
+The elementary density obstruction, decisive for the periods above,
+cannot by itself settle Conjecture~\ref{conj:e273}: the reciprocal
+sum over all of $\mathcal{M}$ is unbounded, so for every threshold
+there are admissible moduli whose reciprocals already exceed it.
 
-The literature offers two such deeper arguments. Hough's
+% [verified: formal/Erdos273/DensityDivergence.lean]
+\begin{proposition}\label{prop:density-diverges}
+The reciprocal sum over the admissible moduli diverges:
+$\sum_{m \in \mathcal{M}} 1/m = \infty$.\footnote{Formally verified
+in Lean 4 + Mathlib (commit \texttt{c5ea00351c28}); see
+\texttt{formal/Erdos273/DensityDivergence.lean}, theorem
+\texttt{admissible\_reciprocal\_not\_summable}.}
+\end{proposition}
+\begin{proof}
+Indexing $\mathcal{M}$ by the witnessing prime, the sum is
+$\sum_{p \geq 5} 1/(p - 1)$. For every prime $p$ one has
+$1/p \leq 1/(p - 1)$, so were this series to converge, $\sum_p 1/p$
+would converge as well, contradicting the divergence of the prime
+harmonic series. Restoring or omitting the finitely many terms with
+$p < 5$ changes the sum by a finite amount, so it diverges over
+$\mathcal{M}$.
+\end{proof}
+
+Consequently, any argument valid for arbitrarily large minimum
+modulus must come from a structural method rather than from the
+reciprocal sum alone. The literature offers such methods. Hough's
 distortion method \cite{Hough2015} and its strengthening by
 Balister--Bollobás--Morris--Sahasrabudhe \cite{BBMS2022} produce
 non-existence results for covering systems whose moduli set
-satisfies a multiplicative-density hypothesis. A direct check
-shows that the weighted sum $C(\mathcal{M}) = \sum_{m \in
-\mathcal{M}} \mu(m)/m$ used in their density theorem diverges
-(by Mertens, since $\sum_p 1/p$ does), so the BBMST density
-theorem does not apply uniformly to $\mathcal{M}$. Their
-auxiliary results, however -- for example the
-divisibility-pair theorem (any covering contains a pair $m_i \mid
-m_j$) -- do constrain admissible coverings without invoking the
-density hypothesis. The route to a sharper-than-$10^{16}$ bound
-specialised to $\mathcal{M}$ runs through the
-Cummings--Filaseta--Trifonov refinement
-\cite{CummingsFilasetaTrifonov2022}: their squarefree-moduli bound of
-$\leq 118$ is, mechanically, BBMST's general distortion theorem
-instantiated on a hyperplane reformulation whose sizes are dictated
-by the moduli set's prime-multiplicity distribution. For
-$\mathcal{M}$ the relevant distribution is
-$\nu_{p}(q - 1)$ as $q$ ranges over primes $\geq 5$, which by the
-Siegel--Walfisz theorem has explicit density $1/(p - 1) p^{\gamma -
-1}$; substituting this into BBMST's moment bounds is the concrete
-path for a future session.
+satisfies a multiplicative-density hypothesis. The signed weighted
+sum used in their density theorem likewise fails to converge on
+$\mathcal{M}$, so that theorem does not apply uniformly here. Their
+hypothesis-free auxiliary result -- Schinzel's conjecture, proved as
+\cite{BBMS2022} Theorem~1.2, that any covering contains a pair $m_i
+\mid m_j$ -- is automatically satisfied by $\mathcal{M}$ (which is
+rich in divisibility pairs) and so yields nothing beyond
+Proposition~\ref{prop:density-diverges}. The route to a
+sharper-than-$10^{16}$ bound specialised to $\mathcal{M}$ runs
+through the Cummings--Filaseta--Trifonov refinement
+\cite{CummingsFilasetaTrifonov2022}, whose squarefree-moduli bound of
+$\leq 118$ is, mechanically, BBMST's distortion theorem instantiated
+on a hyperplane reformulation. A numerical reconstruction of that
+optimisation reproduces the published squarefree value to eight
+significant figures; it also shows that the $\mathcal{M}$-density
+$1/(p-1)$ must enter through the \emph{count of admissible
+hyperplanes} (how often $p \mid q - 1$ as $q$ ranges over primes,
+governed by Siegel--Walfisz) rather than as a per-coordinate weight,
+the latter substitution over-counting the sparsity. Carrying out the
+hyperplane-restriction count is the concrete path for a future
+session.
 
 \appendix
 
@@ -568,7 +590,9 @@ all in \texttt{formal/Erdos273/NumericalBound83160.lean};
         $\mathbb{Z}$-form
         (\texttt{no\_strict\_admissible\_covering\_Z\_180180}):
 \end{itemize}
-all in \texttt{formal/Erdos273/NumericalBound180180.lean}.
+all in \texttt{formal/Erdos273/NumericalBound180180.lean}. Finally,
+Proposition~\ref{prop:density-diverges} (\texttt{admissible\_reciprocal\_not\_summable})
+is in \texttt{formal/Erdos273/DensityDivergence.lean}.
 \end{sloppypar}
 
 The formalisation defines a \texttt{ResidueClass} structure
