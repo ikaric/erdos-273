@@ -63,8 +63,10 @@ and satisfies $D(27720) := \sum_{m \in M_{27720}} 1/m = 953/990 <
 1$, ruling out any strict admissible covering whose moduli all
 divide $27720$; a refinement at $L = 83160 = 2^3 \cdot 3^3 \cdot 5
 \cdot 7 \cdot 11$ strictly strengthens this by adjoining eleven
-further admissible moduli. The argument and its numerical
-specialisations are formalised in Lean 4 against Mathlib;
+further admissible moduli, and an independent bound at $L = 180180 =
+2^2 \cdot 3^2 \cdot 5 \cdot 7 \cdot 11 \cdot 13$ rules out covers
+built from a different family of moduli. The argument and its
+numerical specialisations are formalised in Lean 4 against Mathlib;
 \texttt{\#print axioms} on each theorem reports only the three Lean
 foundational axioms.
 \end{abstract}
@@ -368,6 +370,37 @@ ruled out there has all of its moduli dividing $83160$ as well, and
 is therefore ruled out here too.
 \end{proof}
 
+Adjoining instead a new prime to the period yields an obstruction
+that is genuinely independent of the previous two.
+
+% [verified: formal/Erdos273/NumericalBound180180.lean]
+\begin{theorem}[{Non-existence at $L = 180180$}]
+\label{thm:numerical-180180}
+There is no strict covering of\/ $\mathbb{Z}$ by residue classes
+whose moduli all lie in $\mathcal{M}$ and all divide $180180 = 2^2
+\cdot 3^2 \cdot 5 \cdot 7 \cdot 11 \cdot 13$.\footnote{Formally
+verified in Lean 4 + Mathlib (commit \texttt{c5ea00351c28}); see
+\texttt{formal/Erdos273/NumericalBound180180.lean}, theorem
+\texttt{no\_strict\_admissible\_covering\_Z\_180180}.}
+\end{theorem}
+\begin{proof}
+The divisor lattice of $180180$ has $144$ elements, of which $47$ are
+admissible; their reciprocal sum is
+\[
+  D(180180) = \sum_{m \in M_{180180}} \frac{1}{m} = \frac{173003}{180180}
+  \approx 0.9602 < 1,
+\]
+so Corollary~\ref{cor:abstract-obstruction} applies with $L = 180180$,
+and the $\mathbb{Z}$-to-$[0, L)$ equivalence lifts the conclusion to
+$\mathbb{Z}$ as before. Unlike
+Theorem~\ref{thm:numerical-83160}, this bound is \emph{not} a
+strengthening of Theorem~\ref{thm:numerical-27720}: since $27720 \nmid
+180180$ (the exponent of $2$ drops from $3$ to $2$), the two
+obstructions exclude different families of covers. The admissible
+modulus $52 = 53 - 1$, available at neither $27720$ nor $83160$,
+enters here through the new prime factor~$13$.
+\end{proof}
+
 % [numerical: L ∈ {60, 120, 360, 840, 2520, 27720}]
 \begin{remark}\label{rem:sat-evidence}
 The non-existence of a strict admissible covering at $L = 27720$ is
@@ -412,17 +445,15 @@ non-existence statement strictly stronger than Theorem
 statement is Theorem~\ref{thm:numerical-83160}, verified above. The
 smallest $L$ that introduces a new prime factor is $L = 180180 =
 2^2 \cdot 3^2 \cdot 5 \cdot 7 \cdot 11 \cdot 13$, at which
-$D(180180) = 173003/180180 \approx 0.9602$. The density inequality
-$D(180180) < 1$ has been formally verified in Lean
-(\texttt{formal/Erdos273/NumericalBound180180.lean},
-\texttt{D180180\_lt\_one}); the full non-existence statement at
-$180180$ follows by the same route used for $L = 83160$ --
-computing the $144$-element divisor lattice as a pointwise product
-of prime-power divisor sets via \texttt{Nat.divisors\_mul} and
-discharging each primality obligation with \texttt{norm\_num}
-rather than kernel \texttt{decide} -- and its Lean transcription is
-the immediate next step. The smallest $L$ at which $D(L) \geq 1$ is
-$L = 55440 = 27720 \cdot 2$,
+$D(180180) = 173003/180180 \approx 0.9602$. The full non-existence
+statement at $180180$ is Theorem~\ref{thm:numerical-180180}, verified
+above; because $27720 \nmid 180180$, it is independent of the $27720$
+and $83160$ bounds rather than a strengthening of them. Both larger
+bounds are obtained by the same route: computing the divisor lattice
+as a pointwise product of prime-power divisor sets via
+\texttt{Nat.divisors\_mul}, then discharging each primality obligation
+with \texttt{norm\_num} rather than kernel \texttt{decide}. The
+smallest $L$ at which $D(L) \geq 1$ is $L = 55440 = 27720 \cdot 2$,
 where $D(55440) = 6429/6160 \approx 1.0437$ -- so the $2$-adic
 chain $L = 27720 \cdot 2^k$ exits the density-obstruction regime
 at $k = 1$, while the $3$-adic chain
@@ -524,7 +555,20 @@ all in \texttt{formal/Erdos273/IntegerForm.lean};
         $\mathbb{Z}$-form
         (\texttt{no\_strict\_admissible\_covering\_Z\_83160}):
 \end{itemize}
-all in \texttt{formal/Erdos273/NumericalBound83160.lean}.
+all in \texttt{formal/Erdos273/NumericalBound83160.lean};
+\begin{itemize}
+  \item the divisor-lattice identity
+        $\texttt{Nat.divisors}\ 180180 = D_{180180}$
+        (\texttt{divisors\_180180\_eq}),
+  \item $D(180180) = 173003/180180 < 1$ (\texttt{D180180\_lt\_one})
+        and the admissibility of $M_{180180}$
+        (\texttt{M180180\_admissible}),
+  \item Theorem~\ref{thm:numerical-180180}, finite-range
+        (\texttt{no\_strict\_admissible\_cover\_180180}) and
+        $\mathbb{Z}$-form
+        (\texttt{no\_strict\_admissible\_covering\_Z\_180180}):
+\end{itemize}
+all in \texttt{formal/Erdos273/NumericalBound180180.lean}.
 \end{sloppypar}
 
 The formalisation defines a \texttt{ResidueClass} structure
