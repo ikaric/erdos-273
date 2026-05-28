@@ -20,6 +20,13 @@
 \usepackage{hyperref}
 \usepackage{enumitem}
 \usepackage{xcolor}
+\usepackage{booktabs}
+% Lean source is quoted in the Formal verification appendix using `alltt`
+% (verbatim-like \ttfamily, but with inline math `\(...\)` for the Lean
+% Unicode). This renders font-independently under XeLaTeX/tectonic, whose
+% default monospace font lacks glyphs such as ℤ, ∑, ↦; identifiers with
+% underscores are reproduced literally (alltt only specialises \, {, }).
+\usepackage{alltt}
 
 \theoremstyle{plain}
 \newtheorem{theorem}{Theorem}
@@ -157,7 +164,7 @@ Equivalently: any covering of $\mathbb{Z}$ by progressions with
 moduli in $\mathcal{M}$ must use at least one modulus that does not
 divide $27720$. Bounded-period SAT enumeration confirms the same
 non-existence at every $L$ in $\{60, 120, 360, 840, 2520, 27720\}$
-independently; see Section~\ref{sec:numerics}.
+independently (Remark~\ref{rem:sat-evidence}; Appendix~\ref{sec:sat}).
 
 \section{The density obstruction}
 \label{sec:density}
@@ -353,9 +360,10 @@ admissible; they form
   M_{83160} = M_{27720} \cup \{108,\ 270,\ 378,\ 540,\ 756,\ 2376,\
   2970,\ 4158,\ 7560,\ 8316,\ 16632\},
 \]
-the eleven new moduli being precisely the admissible multiples of
-$108 = 109 - 1$ made available by the third factor of~$3$. Their
-reciprocal sum is
+the eleven new moduli being precisely the admissible divisors of
+$83160$ divisible by $3^3 = 27$ -- those made available by the third
+factor of~$3$, which $27720 = 2^3 \cdot 3^2 \cdot 5 \cdot 7 \cdot 11$
+lacks (the smallest is $108 = 109 - 1$). Their reciprocal sum is
 \[
   D(83160) = \sum_{m \in M_{83160}} \frac{1}{m} = \frac{27241}{27720}
   \approx 0.9827 < 1,
@@ -618,6 +626,89 @@ a decidable predicate; the set $M_{27720}$ is implemented as an
 explicit \texttt{Finset} of $34$ natural numbers and proved equal to
 $\texttt{Nat.divisors 27720}$ filtered by admissibility (kernel
 \texttt{decide}, not \texttt{native\_decide}).
+
+\subsection*{Headline statements (Lean source)}
+
+The statements below are quoted verbatim from the Lean sources; all
+declarations live in \texttt{namespace Erdos273}. The core density
+obstruction, in \texttt{formal/Erdos273/CoveringSystem.lean}, is
+
+\begin{quote}
+\begin{alltt}\small
+theorem strict_covering_density_bound
+    (S : Finset ResidueClass) (L : \(\mathbb{N}\))
+    (_hStrict : (S.image ResidueClass.modulus).card = S.card)
+    (hdvd : \(\forall\) c \(\in\) S, c.modulus \(\mid\) L)
+    (hcov : \(\forall\) i : \(\mathbb{N}\), i < L \(\to\) \(\exists\) c \(\in\) S, (i : \(\mathbb{Z}\)) \(\in\) c.toSet) :
+    L \(\leq\) \(\sum\) c \(\in\) S, L / c.modulus
+\end{alltt}
+\end{quote}
+
+\noindent The partial result on Conjecture~\ref{conj:e273} itself, in
+$\mathbb{Z}$-form (\texttt{formal/Erdos273/IntegerForm.lean}), reads
+
+\begin{quote}
+\begin{alltt}\small
+theorem erdos273_modulus_not_dividing_27720 :
+    Erdos273Conjecture \(\to\) \(\exists\) C : CoveringSystem, C.IsStrict \(\wedge\)
+        C.SolvesErdos273 \(\wedge\) \(\exists\) c \(\in\) C.classes, \(\lnot\) c.modulus \(\mid\) 27720
+\end{alltt}
+\end{quote}
+
+\noindent and the divergence of the reciprocal sum over $\mathcal{M}$
+(\texttt{formal/Erdos273/DensityDivergence.lean}) is
+
+\begin{quote}
+\begin{alltt}\small
+theorem admissible_reciprocal_not_summable :
+    \(\lnot\) Summable (fun p : Nat.Primes \(\mapsto\) (1 : \(\mathbb{R}\)) / ((p : \(\mathbb{R}\)) - 1))
+\end{alltt}
+\end{quote}
+
+\subsection*{Axiom witness}
+
+For each headline theorem, \texttt{\#print axioms} reports exactly the
+three Lean foundational axioms and nothing else:
+
+\begin{center}
+\begin{tabular}{lll}
+\toprule
+Theorem & File & Axioms \\
+\midrule
+\texttt{strict\_covering\_density\_bound}
+  & \texttt{CoveringSystem.lean} & clean \\
+\texttt{no\_strict\_cover\_of\_low\_density}
+  & \texttt{CoveringSystem.lean} & clean \\
+\texttt{erdos273\_modulus\_not\_dividing\_27720}
+  & \texttt{IntegerForm.lean} & clean \\
+\texttt{no\_strict\_admissible\_covering\_Z\_83160}
+  & \texttt{NumericalBound83160.lean} & clean \\
+\texttt{no\_strict\_admissible\_covering\_Z\_180180}
+  & \texttt{NumericalBound180180.lean} & clean \\
+\texttt{admissible\_reciprocal\_not\_summable}
+  & \texttt{DensityDivergence.lean} & clean \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\noindent Here ``clean'' abbreviates the axiom set
+$\{\texttt{propext},\ \texttt{Classical.choice},\ \texttt{Quot.sound}\}$,
+and file paths omit the common prefix \texttt{formal/Erdos273/}.
+
+\subsection*{Reproducing the verification}
+
+\begin{enumerate}
+\item Clone the repository at the commit whose
+\texttt{formal/lake-manifest.json} pins Mathlib at \texttt{c5ea00351c28}.
+\item Build with \texttt{(cd formal \&\& lake exe cache get \&\& lake
+build)}: the blanket \texttt{import Mathlib} pulls the pre-built
+\texttt{.olean} cache, after which the project's own modules compile in a
+few minutes.
+\item Inspect the axiom report: every \texttt{.lean} file ends with
+\texttt{\#print axioms} lines for its theorems, emitted during
+\texttt{lake build}; the output lists only \texttt{propext},
+\texttt{Classical.choice}, and \texttt{Quot.sound}.
+\end{enumerate}
 
 \section{Bounded-period SAT enumeration}
 \label{sec:sat}
