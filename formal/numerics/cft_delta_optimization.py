@@ -307,7 +307,11 @@ def tail_bound_squarefree(N: int, cd: CoordData) -> mpf:
 
     M0 = cd.prefix_3[N]  # prod_{j=1..N} (1 + 3/((1-d_j)|S_j|))
 
-    c1 = -log(log_p_N) + 1 / (2 * log_p_N * log_p_N)
+    # CFT Lemma 4.7: c1 = -log log p_N + 1/log^2 p_N  (the 1/log^2, NOT
+    # 1/(2 log^2), absorbs both halves 1/(2 log^2 p_{k-1}) + 1/(2 log^2 p_N)
+    # bounded by 1/log^2 p_N since p_{k-1} >= p_N). Verified vs validation
+    # script cft_validate_squarefree.py which reproduces CFT eq.(12) to 8 dp.
+    c1 = -log(log_p_N) + 1 / (log_p_N * log_p_N)
     c2 = 1 + 3 / (2 * log_p_N)
 
     polylog = (
