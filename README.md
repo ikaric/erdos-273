@@ -40,10 +40,10 @@ literature.
 ## Status
 
 <!-- BEGIN STATUS -->
-- **Last session**: `2026-05-28` (session 5)
-- **Roadmap**: [#1](../../issues/1) — sub-lemma checklist with progress meter (4 / 6 closed)
+- **Last session**: `2026-05-29` (session 6)
+- **Roadmap**: [#1](../../issues/1) — **6 / 6 seeded vectors explored**; conjecture OPEN (the meter tracks vectors attempted, not a solution). `/loop /solve` halted; run `/vector add` to seed a new direction.
 - **Verified results**: 33 `#print axioms`-clean Lean theorems across 6 files; headline results — strict-covering density bound, numerical obstructions at $L = 27720, 83160, 180180$, and the divergence $\sum_{m\in\mathcal{M}} 1/m = \infty$ (why density alone is capped)
-- **Current focus**: V3 (#5) hyperplane-restriction count for $\mathcal{M}$ — the CFT engine is validated; next is putting the $1/(p-1)$ density on the admissible-hyperplane count (analyst task), the lever toward the full problem
+- **Current focus**: seeded attack complete — both known non-existence levers exhausted (density Mertens-capped; distortion proven un-sharpenable for $\mathcal{M}$). Awaiting `/vector` for a new posture (construction search, or the all-moduli-even structural lever)
 - **Manuscript**: [`proof.pdf`](manuscript/proof.pdf) — rebuilt every session
 <!-- END STATUS -->
 
@@ -69,13 +69,9 @@ See [`proof.pdf`](manuscript/proof.pdf) and [Appendix A: Formal verification](ma
 ## What's open
 
 <!-- BEGIN OPEN -->
-| Obligation | Status | Issue |
-|---|---|---|
-| V3: Hough-style minimum-modulus argument adapted to $p-1$ (lever toward the full problem) | open | [#5](../../issues/5) |
-| V2: Distortion-method non-existence (BBMS 2022) — recommended for retirement (BBMST levers dead for $\mathcal{M}$) | open | [#4](../../issues/4) |
+*No open seeded obligations.* All five attack vectors (V1–V5) are explored: V1/V4/V5 delivered verified artifacts; **V2 and V3 are documented dead ends** — both known non-existence levers (density, distortion) are exhausted for $\mathcal{M}$ ([#4](../../issues/4), [#5](../../issues/5)).
 
-See the [ROADMAP issue](../../issues/1) for the live sub-lemma
-checklist with progress meter.
+**The conjecture itself remains open.** `/loop /solve` has halted (seeded attack complete). To continue, run `/vector add` for a new direction — a construction/existence search at periods $L \geq 55440$ (where $D(L)\geq1$), or the all-moduli-even structural lever ($\mathcal{M}\subset 2\mathbb{Z}_{\geq4}$) — or `/polish` to finalize the manuscript on the current verified state. See [`findings/decision-halt-2026-05-29.md`](findings/decision-halt-2026-05-29.md).
 <!-- END OPEN -->
 
 ## Repository tour
