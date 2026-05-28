@@ -6,3 +6,4 @@ import «Erdos273».NumericalBound27720
 import «Erdos273».IntegerForm
 import «Erdos273».NumericalBound180180
 import «Erdos273».NumericalBound83160
+import «Erdos273».DensityDivergence
