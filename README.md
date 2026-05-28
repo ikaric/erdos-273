@@ -40,10 +40,10 @@ literature.
 ## Status
 
 <!-- BEGIN STATUS -->
-- **Last session**: `2026-05-28`
+- **Last session**: `2026-05-28` (session 2)
 - **Roadmap**: [#1](../../issues/1) — sub-lemma checklist with progress meter (3 / 6 closed)
-- **Verified results**: 2 headline theorems (density bound + numerical $L = 27720$), 17 `#print axioms`-clean Lean theorems total
-- **Current focus**: V5 range extension; librarian sweep of Hough/BBMST auxiliary results applicable to $\mathcal{M}$
+- **Verified results**: 21 `#print axioms`-clean Lean theorems across 4 files; headline results — strict-covering density bound, numerical $L = 27720$ obstruction (range and $\mathbb{Z}$ forms), density $D(180180) < 1$
+- **Current focus**: close the $L = 180180$ sketch (kernel-decide budget closure); V3 CFT $\delta_j$ optimization with $\mathcal{M}$-density factor
 - **Manuscript**: [`proof.pdf`](manuscript/proof.pdf) — rebuilt every session
 <!-- END STATUS -->
 
@@ -55,9 +55,13 @@ literature.
 | Strict-covering density bound (Theorem 4) | [`formal/Erdos273/CoveringSystem.lean`](formal/Erdos273/CoveringSystem.lean) | clean |
 | Abstract density obstruction (Corollary 5) | [`formal/Erdos273/CoveringSystem.lean`](formal/Erdos273/CoveringSystem.lean) | clean |
 | $D(27720) = 953/990 < 1$ (Lemma 7) | [`formal/Erdos273/NumericalBound27720.lean`](formal/Erdos273/NumericalBound27720.lean) | clean |
-| No strict admissible cover with moduli dividing 27720 (Theorem 8) | [`formal/Erdos273/NumericalBound27720.lean`](formal/Erdos273/NumericalBound27720.lean) | clean |
+| No strict admissible cover with moduli $\mid 27720$ (Theorem 8, finite-range form) | [`formal/Erdos273/NumericalBound27720.lean`](formal/Erdos273/NumericalBound27720.lean) | clean |
+| $\mathbb{Z} \leftrightarrow [0, L)$ equivalence | [`formal/Erdos273/IntegerForm.lean`](formal/Erdos273/IntegerForm.lean) | clean |
+| No strict admissible cover with moduli $\mid 27720$ (Theorem 8, $\mathbb{Z}$-form) | [`formal/Erdos273/IntegerForm.lean`](formal/Erdos273/IntegerForm.lean) | clean |
+| Erdős#273 ⇒ covering uses modulus $\nmid 27720$ (Corollary 9) | [`formal/Erdos273/IntegerForm.lean`](formal/Erdos273/IntegerForm.lean) | clean |
+| $D(180180) = 173003/180180 < 1$ | [`formal/Erdos273/NumericalBound180180.lean`](formal/Erdos273/NumericalBound180180.lean) | clean |
 
-See [`proof.pdf`](manuscript/proof.pdf) and [Appendix A: Formal verification](manuscript/proof.pdf) for the full list (17 axiom-clean theorems).
+See [`proof.pdf`](manuscript/proof.pdf) and [Appendix A: Formal verification](manuscript/proof.pdf) for the full list (21 axiom-clean theorems).
 <!-- END VERIFIED -->
 
 ## What's open
