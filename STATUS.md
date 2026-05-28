@@ -1,12 +1,14 @@
 # Status
 
-Current focus: session 3 — parallel dispatch on (a) formalist to
-close L = 83160 verified non-existence (smallest non-redundant
-winner from V5 density scan), (b) computationalist to implement
-the CFT delta_j optimization with 𝓜-density factor (V3 lowest-
-effort highest-info deliverable per the librarian survey).
+Current focus: session 3 interrupted by user (model switch). Two
+WIP commits pushed: b17cee8 (NumericalBound83160.lean — file
+complete, kernel `lake build` still running at interrupt; verify
+before promoting) and 965bba5 (CFT optimization Python — squarefree
+sanity check fails at C_0 = 118, debug needed before 𝓜-mode is
+meaningful). Next session: rerun `(cd formal && lake build)` to
+verify 83160; if clean, promote; then return to CFT debug.
 
-Last commit: f48fbba status: session 2 end.
+Last commit: 965bba5 wip: CFT delta_j optimization for 𝓜.
 
 Blocker: none.
 
