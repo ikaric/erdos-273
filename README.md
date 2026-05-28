@@ -40,10 +40,10 @@ literature.
 ## Status
 
 <!-- BEGIN STATUS -->
-- **Last session**: `2026-05-28` (session 2)
-- **Roadmap**: [#1](../../issues/1) — sub-lemma checklist with progress meter (3 / 6 closed)
-- **Verified results**: 21 `#print axioms`-clean Lean theorems across 4 files; headline results — strict-covering density bound, numerical $L = 27720$ obstruction (range and $\mathbb{Z}$ forms), density $D(180180) < 1$
-- **Current focus**: close the $L = 180180$ sketch (kernel-decide budget closure); V3 CFT $\delta_j$ optimization with $\mathcal{M}$-density factor
+- **Last session**: `2026-05-28` (session 4)
+- **Roadmap**: [#1](../../issues/1) — sub-lemma checklist with progress meter (4 / 6 closed)
+- **Verified results**: 32 `#print axioms`-clean Lean theorems across 5 files; headline results — strict-covering density bound, numerical $L = 27720$ obstruction (range and $\mathbb{Z}$ forms), strengthening at $L = 83160$, and the independent $L = 180180$ obstruction (prime 13)
+- **Current focus**: V3 (#5) CFT/distortion $\delta_j$ optimization for $\mathcal{M}$ — the lever toward the full problem (density alone is Mertens-capped)
 - **Manuscript**: [`proof.pdf`](manuscript/proof.pdf) — rebuilt every session
 <!-- END STATUS -->
 
@@ -59,9 +59,10 @@ literature.
 | $\mathbb{Z} \leftrightarrow [0, L)$ equivalence | [`formal/Erdos273/IntegerForm.lean`](formal/Erdos273/IntegerForm.lean) | clean |
 | No strict admissible cover with moduli $\mid 27720$ (Theorem 8, $\mathbb{Z}$-form) | [`formal/Erdos273/IntegerForm.lean`](formal/Erdos273/IntegerForm.lean) | clean |
 | Erdős#273 ⇒ covering uses modulus $\nmid 27720$ (Corollary 9) | [`formal/Erdos273/IntegerForm.lean`](formal/Erdos273/IntegerForm.lean) | clean |
-| $D(180180) = 173003/180180 < 1$ | [`formal/Erdos273/NumericalBound180180.lean`](formal/Erdos273/NumericalBound180180.lean) | clean |
+| No strict admissible cover with moduli $\mid 83160$ ($\mathbb{Z}$-form; strengthens 27720) | [`formal/Erdos273/NumericalBound83160.lean`](formal/Erdos273/NumericalBound83160.lean) | clean |
+| No strict admissible cover with moduli $\mid 180180$ ($\mathbb{Z}$-form; independent, prime 13) | [`formal/Erdos273/NumericalBound180180.lean`](formal/Erdos273/NumericalBound180180.lean) | clean |
 
-See [`proof.pdf`](manuscript/proof.pdf) and [Appendix A: Formal verification](manuscript/proof.pdf) for the full list (21 axiom-clean theorems).
+See [`proof.pdf`](manuscript/proof.pdf) and [Appendix A: Formal verification](manuscript/proof.pdf) for the full list (32 axiom-clean theorems).
 <!-- END VERIFIED -->
 
 ## What's open
@@ -69,9 +70,8 @@ See [`proof.pdf`](manuscript/proof.pdf) and [Appendix A: Formal verification](ma
 <!-- BEGIN OPEN -->
 | Obligation | Status | Issue |
 |---|---|---|
-| V2: Distortion-method non-existence (BBMS 2022, $p-1$ specialization) | open | [#4](../../issues/4) |
-| V3: Hough-style minimum-modulus argument adapted to $p-1$ | open | [#5](../../issues/5) |
-| V5: Computational range extension — minimal coverings via $\mathcal{M} \cap [4, L]$ | open | [#7](../../issues/7) |
+| V3: Hough-style minimum-modulus argument adapted to $p-1$ (lever toward the full problem) | open | [#5](../../issues/5) |
+| V2: Distortion-method non-existence (BBMS 2022) — recommended for retirement (BBMST levers dead for $\mathcal{M}$) | open | [#4](../../issues/4) |
 
 See the [ROADMAP issue](../../issues/1) for the live sub-lemma
 checklist with progress meter.

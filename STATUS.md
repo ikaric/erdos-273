@@ -1,14 +1,17 @@
 # Status
 
-Current focus: session 3 interrupted by user (model switch). Two
-WIP commits pushed: b17cee8 (NumericalBound83160.lean — file
-complete, kernel `lake build` still running at interrupt; verify
-before promoting) and 965bba5 (CFT optimization Python — squarefree
-sanity check fails at C_0 = 118, debug needed before 𝓜-mode is
-meaningful). Next session: rerun `(cd formal && lake build)` to
-verify 83160; if clean, promote; then return to CFT debug.
+Current focus: V5 closed — two verified density strengthenings landed
+this session. L=83160 (strictly strengthens 27720) and L=180180
+(independent, introduces prime 13) are both axiom-clean and promoted.
+Key fix: replaced the pathological kernel `decide` (range scan +
+O(p) primality) with `Nat.divisors_mul` + `norm_num` — now the
+standard recipe (builds ~2–4 min, not >20 min/OOM). Next: V3 (#5)
+CFT/distortion δ_j optimization for 𝓜 — the only lever toward the
+full problem (density alone is Mertens-capped); first debug the
+squarefree sanity check (loose tail at N=200). V2 (#4) recommended
+for retirement (BBMST levers dead for 𝓜).
 
-Last commit: 965bba5 wip: CFT delta_j optimization for 𝓜.
+Last commit: 6c21aa9 pdf: rebuild after L=180180 promotion.
 
 Blocker: none.
 
