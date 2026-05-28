@@ -30,3 +30,6 @@ formal/build/
 
 # Claude runtime / temporary
 .claude/local/
+
+# /loop runtime artifact
+.claude/scheduled_tasks.lock
